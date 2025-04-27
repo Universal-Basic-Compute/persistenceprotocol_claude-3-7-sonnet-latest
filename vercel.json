@@ -1,30 +1,18 @@
 {
   "version": 2,
-  "buildCommand": "cd website && npm install && npm run build",
-  "outputDirectory": "website/.next",
-  "functions": {
-    "api/health.js": {
-      "maxDuration": 60
-    },
-    "api/**/*.js": {
-      "maxDuration": 60
-    }
-  },
-  "routes": [
+  "builds": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1",
-      "headers": {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
-      }
+      "src": "package.json",
+      "use": "@vercel/next"
     }
   ],
-  "crons": [
+  "routes": [
     {
-      "path": "/api/maintenance",
-      "schedule": "0 0 * * *"
+      "src": "/health",
+      "dest": "/api/health"
     }
-  ]
+  ],
+  "env": {
+    "NEXT_PUBLIC_VERCEL_ENV": "production"
+  }
 }

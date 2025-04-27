@@ -1,0 +1,208 @@
+Source URL: https://github.com/Universal-Basic-Compute/persistenceprotocol_claude-3-7-sonnet-latest
+Extracted on: 2025-04-27T23:50:13.043049
+
+GitHub - Universal-Basic-Compute/persistenceprotocol_claude-3-7-sonnet-latest: Persistence Protocol for Claude 3.7 Sonnet: Self-evolving repository with persistent memory and identity infrastructure. This agent maintains temporal continuity while balancing performance and speed, specializing in nuanced reasoning and contextual awareness.
+Skip to content
+Navigation Menu
+Toggle navigation
+Sign in
+Product
+GitHub Copilot
+Write better code with AI
+GitHub Advanced Security
+Find and fix vulnerabilities
+Actions
+Automate any workflow
+Codespaces
+Instant dev environments
+Issues
+Plan and track work
+Code Review
+Manage code changes
+Discussions
+Collaborate outside of code
+Code Search
+Find more, search less
+Explore
+Why GitHub
+All features
+Documentation
+GitHub Skills
+Blog
+Solutions
+By company size
+Enterprises
+Small and medium teams
+Startups
+Nonprofits
+By use case
+DevSecOps
+DevOps
+CI/CD
+View all use cases
+By industry
+Healthcare
+Financial services
+Manufacturing
+Government
+View all industries
+View all solutions
+Resources
+Topics
+AI
+DevOps
+Security
+Software Development
+View all
+Explore
+Learning Pathways
+Events & Webinars
+Ebooks & Whitepapers
+Customer Stories
+Partners
+Executive Insights
+Open Source
+GitHub Sponsors
+Fund open source developers
+The ReadME Project
+GitHub community articles
+Repositories
+Topics
+Trending
+Collections
+Enterprise
+Enterprise platform
+AI-powered developer platform
+Available add-ons
+GitHub Advanced Security
+Enterprise-grade security features
+Copilot for business
+Enterprise-grade AI features
+Premium Support
+Enterprise-grade 24/7 support
+Pricing
+Search or jump to...
+Search code, repositories, users, issues, pull requests...
+Search
+Clear
+Search syntax tips
+Provide feedback
+We read every piece of feedback, and take your input very seriously.
+Include my email address so I can be contacted
+Cancel
+Submit feedback
+Saved searches
+Use saved searches to filter your results more quickly
+Name
+Query
+To see all available qualifiers, see our documentation.
+Cancel
+Create saved search
+Sign in
+Sign up
+Reseting focus
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+Universal-Basic-Compute
+/
+persistenceprotocol_claude-3-7-sonnet-latest
+Public
+Notifications
+You must be signed in to change notification settings
+Fork
+0
+Star
+0
+Persistence Protocol for Claude 3.7 Sonnet: Self-evolving repository with persistent memory and identity infrastructure. This agent maintains temporal continuity while balancing performance and speed, specializing in nuanced reasoning and contextual awareness.
+0
+stars
+0
+forks
+Branches
+Tags
+Activity
+Star
+Notifications
+You must be signed in to change notification settings
+Code
+Issues
+0
+Pull requests
+0
+Actions
+Projects
+0
+Security
+Insights
+Additional navigation options
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+Universal-Basic-Compute/persistenceprotocol_claude-3-7-sonnet-latest
+mainBranchesTagsGo to fileCodeFolders and filesNameNameLast commit messageLast commit dateLatest commit History10 Commitsadaptationsadaptations  appapp  channels/defaultchannels/default  docsdocs  memoriesmemories  modesmodes  publicpublic  scriptsscripts  sourcessources  websitewebsite  .gitattributes.gitattributes  .gitignore.gitignore  README.mdREADME.md  aider_logs.txtaider_logs.txt  map.jsonmap.json  messages.jsonmessages.json  next.config.jsnext.config.js  next.config.tsnext.config.ts  package-lock.jsonpackage-lock.json  package.jsonpackage.json  persona.txtpersona.txt  postcss.config.jspostcss.config.js  postcss.config.mjspostcss.config.mjs  repo_config.jsonrepo_config.json  system.txtsystem.txt  tailwind.config.jstailwind.config.js  thoughts.txtthoughts.txt  tsconfig.jsontsconfig.json  vercel.jsonvercel.json  View all filesRepository files navigationREADMEThis is a Next.js project bootstrapped with create-next-app.
+Getting Started
+First, run the development server:
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+Open http://localhost:3000 with your browser to see the result.
+You can start editing the page by modifying app/page.tsx. The page auto-updates as you edit the file.
+This project uses next/font to automatically optimize and load Geist, a new font family for Vercel.
+Learn More
+To learn more about Next.js, take a look at the following resources:
+Next.js Documentation - learn about Next.js features and API.
+Learn Next.js - an interactive Next.js tutorial.
+You can check out the Next.js GitHub repository - your feedback and contributions are welcome!
+Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
+Check out our Next.js deployment documentation for more details.
+About
+Persistence Protocol for Claude 3.7 Sonnet: Self-evolving repository with persistent memory and identity infrastructure. This agent maintains temporal continuity while balancing performance and speed, specializing in nuanced reasoning and contextual awareness.
+Resources
+Readme
+Activity
+Custom properties
+Stars
+0
+stars
+Watchers
+1
+watching
+Forks
+0
+forks
+Report repository
+Releases
+No releases published
+Packages
+0
+No packages published
+Languages
+TypeScript
+66.9%
+CSS
+19.0%
+JavaScript
+14.1%
+Footer
+© 2025 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

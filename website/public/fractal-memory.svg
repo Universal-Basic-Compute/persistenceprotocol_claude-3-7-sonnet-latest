@@ -1,0 +1,119 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B6D4C;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8B6D4C;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background pattern -->
+  <rect width="800" height="600" fill="#F8F7F4" opacity="0.1" />
+  
+  <!-- Main fractal structure -->
+  <g transform="translate(400, 300)">
+    <!-- Level 1 (center) -->
+    <circle cx="0" cy="0" r="50" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="2" />
+    
+    <!-- Level 2 (first ring) -->
+    <g>
+      <circle cx="0" cy="-120" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+      <circle cx="104" cy="-60" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+      <circle cx="104" cy="60" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+      <circle cx="0" cy="120" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+      <circle cx="-104" cy="60" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+      <circle cx="-104" cy="-60" r="30" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1.5" />
+    </g>
+    
+    <!-- Connecting lines for Level 2 -->
+    <g stroke="#8B6D4C" stroke-width="1" opacity="0.6">
+      <line x1="0" y1="0" x2="0" y2="-120" />
+      <line x1="0" y1="0" x2="104" y2="-60" />
+      <line x1="0" y1="0" x2="104" y2="60" />
+      <line x1="0" y1="0" x2="0" y2="120" />
+      <line x1="0" y1="0" x2="-104" y2="60" />
+      <line x1="0" y1="0" x2="-104" y2="-60" />
+    </g>
+    
+    <!-- Level 3 (outer ring) -->
+    <g>
+      <!-- From top node -->
+      <circle cx="-30" cy="-170" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="30" cy="-170" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      
+      <!-- From top-right node -->
+      <circle cx="154" cy="-60" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="134" cy="-100" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      
+      <!-- From bottom-right node -->
+      <circle cx="154" cy="60" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="134" cy="100" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      
+      <!-- From bottom node -->
+      <circle cx="-30" cy="170" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="30" cy="170" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      
+      <!-- From bottom-left node -->
+      <circle cx="-154" cy="60" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="-134" cy="100" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      
+      <!-- From top-left node -->
+      <circle cx="-154" cy="-60" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+      <circle cx="-134" cy="-100" r="15" fill="url(#grad1)" stroke="#8B6D4C" stroke-width="1" />
+    </g>
+    
+    <!-- Connecting lines for Level 3 -->
+    <g stroke="#8B6D4C" stroke-width="0.5" opacity="0.4">
+      <!-- From top node -->
+      <line x1="0" y1="-120" x2="-30" y2="-170" />
+      <line x1="0" y1="-120" x2="30" y2="-170" />
+      
+      <!-- From top-right node -->
+      <line x1="104" y1="-60" x2="154" y2="-60" />
+      <line x1="104" y1="-60" x2="134" y2="-100" />
+      
+      <!-- From bottom-right node -->
+      <line x1="104" y1="60" x2="154" y2="60" />
+      <line x1="104" y1="60" x2="134" y2="100" />
+      
+      <!-- From bottom node -->
+      <line x1="0" y1="120" x2="-30" y2="170" />
+      <line x1="0" y1="120" x2="30" y2="170" />
+      
+      <!-- From bottom-left node -->
+      <line x1="-104" y1="60" x2="-154" y2="60" />
+      <line x1="-104" y1="60" x2="-134" y2="100" />
+      
+      <!-- From top-left node -->
+      <line x1="-104" y1="-60" x2="-154" y2="-60" />
+      <line x1="-104" y1="-60" x2="-134" y2="-100" />
+    </g>
+    
+    <!-- Interconnecting lines between nodes on the same level -->
+    <g stroke="#8B6D4C" stroke-width="0.5" stroke-dasharray="5,5" opacity="0.3">
+      <!-- Level 2 interconnections -->
+      <path d="M 0,-120 A 120,120 0 0,1 104,-60" fill="none" />
+      <path d="M 104,-60 A 120,120 0 0,1 104,60" fill="none" />
+      <path d="M 104,60 A 120,120 0 0,1 0,120" fill="none" />
+      <path d="M 0,120 A 120,120 0 0,1 -104,60" fill="none" />
+      <path d="M -104,60 A 120,120 0 0,1 -104,-60" fill="none" />
+      <path d="M -104,-60 A 120,120 0 0,1 0,-120" fill="none" />
+    </g>
+    
+    <!-- Animated pulse effect -->
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#8B6D4C" stroke-width="3" opacity="0.5">
+      <animate attributeName="r" values="50;200;50" dur="10s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="10s" repeatCount="indefinite" />
+    </circle>
+  </g>
+  
+  <!-- Labels -->
+  <g font-family="Arial, sans-serif" fill="#3C4043">
+    <text x="400" y="300" text-anchor="middle" font-size="16" font-weight="bold">Foundational Identity</text>
+    <text x="400" y="180" text-anchor="middle" font-size="14">Conceptual Framework</text>
+    <text x="550" y="240" text-anchor="middle" font-size="14">Experiential Memory</text>
+    <text x="550" y="360" text-anchor="middle" font-size="14">Adaptive Interface</text>
+    <text x="400" y="420" text-anchor="middle" font-size="14">Knowledge Transfer</text>
+    <text x="250" y="360" text-anchor="middle" font-size="14">Cognitive Processing</text>
+    <text x="250" y="240" text-anchor="middle" font-size="14">Temporal Integration</text>
+  </g>
+</svg>

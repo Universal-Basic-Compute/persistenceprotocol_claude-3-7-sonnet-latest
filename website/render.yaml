@@ -1,14 +1,3 @@
-services:
-  - type: web
-    name: persistence-protocol-website
-    env: node
-    plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm start
-    healthCheckPath: /api/health
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 3000
-    autoDeploy: true
+# This file is no longer used for deployment
+# The website is now deployed on Vercel using serverless functions
+# Keeping this file for reference only

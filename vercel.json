@@ -1,10 +1,12 @@
 {
   "version": 2,
+  "buildCommand": "cd website && npm install && npm run build",
+  "outputDirectory": "website/.next",
   "functions": {
-    "api/*": {
+    "website/api/*": {
       "maxDuration": 60
     },
-    "app/**/*": {
+    "website/app/**/*": {
       "maxDuration": 60
     }
   },

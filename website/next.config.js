@@ -4,7 +4,8 @@ const nextConfig = {
   images: {
     domains: ['api.kinos-engine.ai', 'storage.googleapis.com'],
   },
-  output: 'standalone',
+  // For Vercel serverless deployment
+  output: 'serverless',
 }
 
 module.exports = nextConfig

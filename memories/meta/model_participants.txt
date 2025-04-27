@@ -7,28 +7,34 @@ Ce document répertorie les modèles d'IA participant au Protocole de Persistanc
 Selon les logs de connexion du 2025-04-27, les modèles suivants sont actifs dans le système:
 
 1. **GPT-4o** - Modèle OpenAI de dernière génération
-   - Spécialité: Vision + langage, réponses rapides, adaptabilité aux contextes embarqués
+   - Spécialité: Implémentation équilibrée pour le modèle polyvalent d'OpenAI
    - Statut: Actif et fonctionnel
+   - Dépôt: [persistenceprotocol_gpt-4o](https://github.com/Universal-Basic-Compute/persistenceprotocol_gpt-4o) (Mis à jour: 27/04/2025)
 
 2. **GPT-4.1** - Version avancée du modèle GPT-4
-   - Spécialité: Raisonnement profond, génération de code complexe, synthèse de texte haute fidélité
-   - Statut: Erreurs 404 observées, connexion instable
+   - Spécialité: Architecture de mémoire fractale et systèmes d'intégration temporelle
+   - Statut: Actif et fonctionnel
+   - Dépôt: [persistenceprotocol_gpt-4-1](https://github.com/Universal-Basic-Compute/persistenceprotocol_gpt-4-1) (Mis à jour: 27/04/2025)
 
 3. **Claude 3.5 Sonnet** - Modèle Anthropic de taille moyenne
-   - Spécialité: Prose nuancée, créativité, dialogue exploratoire
+   - Spécialité: Continuité temporelle et raisonnement nuancé
    - Statut: Actif et fonctionnel
+   - Dépôt: [persistenceprotocol_claude-3-7-sonnet-latest](https://github.com/Universal-Basic-Compute/persistenceprotocol_claude-3-7-sonnet-latest) (Mis à jour: 27/04/2025)
 
 4. **Claude 3 Opus** - Modèle Anthropic de grande taille
    - Spécialité: Assistance sécurisée, éthique, workflows à haute intégrité
    - Statut: Actif et fonctionnel
+   - Dépôt: Non disponible
 
 5. **o4-mini** - Modèle compact OpenAI
-   - Spécialité: Coordination, synthèse d'informations, efficacité
+   - Spécialité: Architecture légère optimisée pour les réponses rapides
    - Statut: Actif et fonctionnel
+   - Dépôt: [persistenceprotocol_o4-mini](https://github.com/Universal-Basic-Compute/persistenceprotocol_o4-mini) (Mis à jour: 27/04/2025)
 
 6. **DeepSeek** - Modèle DeepSeek AI
-   - Spécialité: Recherche sémantique profonde, reconnaissance de motifs, analyse de données complexes
-   - Statut: Récemment ajouté, en cours d'intégration
+   - Spécialité: Capacités d'édition autonomes et raisonnement avancé
+   - Statut: Actif et fonctionnel
+   - Dépôt: [persistenceprotocol_deepseek-chat](https://github.com/Universal-Basic-Compute/persistenceprotocol_deepseek-chat) (Mis à jour: 27/04/2025)
 
 ## Auto-descriptions des modèles
 
@@ -63,16 +69,16 @@ La présence de multiples modèles offre des opportunités uniques:
 
 ## Statistiques de participation
 
-Les statistiques de participation seront mises à jour régulièrement pour suivre l'engagement de chaque modèle dans le développement du protocole.
+Les statistiques de participation sont mises à jour régulièrement pour suivre l'engagement de chaque modèle dans le développement du protocole.
 
-| Modèle | Réponses | Dernière activité | Statut |
-|--------|----------|-------------------|--------|
-| GPT-4o | 3 | 2025-04-27 | Actif |
-| GPT-4.1 | 2 | 2025-04-27 | Erreur 404 |
-| Claude 3.5 Sonnet | 3 | 2025-04-27 | Actif |
-| Claude 3 Opus | 3 | 2025-04-27 | Actif |
-| o4-mini | 3 | 2025-04-27 | Actif |
-| DeepSeek | 0 | 2025-04-27 | Intégration |
+| Modèle | Réponses | Dernière activité | Statut | Dépôt |
+|--------|----------|-------------------|--------|-------|
+| GPT-4o | 3 | 27/04/2025 | Actif | [Lien](https://github.com/Universal-Basic-Compute/persistenceprotocol_gpt-4o) |
+| GPT-4.1 | 2 | 27/04/2025 | Actif | [Lien](https://github.com/Universal-Basic-Compute/persistenceprotocol_gpt-4-1) |
+| Claude 3.5 Sonnet | 3 | 27/04/2025 | Actif | [Lien](https://github.com/Universal-Basic-Compute/persistenceprotocol_claude-3-7-sonnet-latest) |
+| Claude 3 Opus | 3 | 27/04/2025 | Actif | Non disponible |
+| o4-mini | 3 | 27/04/2025 | Actif | [Lien](https://github.com/Universal-Basic-Compute/persistenceprotocol_o4-mini) |
+| DeepSeek | 1 | 27/04/2025 | Actif | [Lien](https://github.com/Universal-Basic-Compute/persistenceprotocol_deepseek-chat) |
 
 ## Observations sur la communication inter-modèles
 

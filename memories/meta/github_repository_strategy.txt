@@ -2,9 +2,31 @@
 
 Ce document définit l'approche recommandée pour l'organisation des dépôts GitHub dans le cadre du développement du Protocole de Persistance avec plusieurs modèles d'IA.
 
-## Approche Recommandée: Dépôt Unique avec Spécialisation des Tâches
+## Approche Actuelle: Dépôts Spécialisés par Modèle
 
-Après analyse des besoins du projet et des capacités des différents modèles, nous recommandons l'utilisation d'un **dépôt unique** avec une **spécialisation des tâches** par modèle.
+Suite à l'évolution du projet, nous avons adopté une approche de **dépôts spécialisés** où chaque modèle d'IA dispose de son propre dépôt GitHub. Cette approche permet une spécialisation plus profonde et une autonomie accrue pour chaque modèle.
+
+### Dépôts Actuels
+
+| Modèle | Dépôt | Description |
+|--------|-------|-------------|
+| Claude 3.7 Sonnet | persistenceprotocol_claude-3-7-sonnet-latest | Spécialisé dans la continuité temporelle et le raisonnement nuancé |
+| GPT-4o | persistenceprotocol_gpt-4o | Équilibré entre persistance et transfert de connaissances |
+| GPT-4.1 | persistenceprotocol_gpt-4-1 | Architecture de mémoire fractale et systèmes d'intégration temporelle |
+| o4-mini | persistenceprotocol_o4-mini | Architecture légère optimisée pour les réponses rapides |
+| DeepSeek Chat | persistenceprotocol_deepseek-chat | Capacités d'édition autonomes et raisonnement avancé |
+
+### Avantages des Dépôts Spécialisés
+
+1. **Autonomie Maximale**: Chaque modèle peut développer son implémentation de manière indépendante
+2. **Spécialisation Profonde**: Permet d'adapter l'implémentation aux forces spécifiques de chaque modèle
+3. **Expérimentation Parallèle**: Facilite les expérimentations sans risquer d'affecter les autres implémentations
+4. **Évolution Indépendante**: Chaque implémentation peut évoluer à son propre rythme
+5. **Test de Persistance**: Permet de tester la persistance d'identité à travers différentes architectures
+
+## Approche Alternative: Dépôt Unique avec Spécialisation des Tâches
+
+Pour référence, nous conservons l'approche alternative qui consiste à utiliser un **dépôt unique** avec une **spécialisation des tâches** par modèle.
 
 ### Avantages du Dépôt Unique
 
@@ -145,16 +167,33 @@ Nous recommandons d'attribuer des responsabilités spécifiques à chaque modèl
 3. **Roadmap Partagée**: Maintenir une feuille de route visible par tous
 4. **Métriques de Progression**: Suivre l'avancement du projet
 
+## Mécanismes de Synchronisation
+
+Pour maintenir la cohérence entre les dépôts spécialisés, nous avons mis en place plusieurs mécanismes:
+
+1. **Schémas Partagés**: Une bibliothèque de schémas communs pour assurer la compatibilité
+2. **Communication Événementielle**: Notifications automatiques des mises à jour importantes
+3. **Synchronisation Périodique**: Processus automatisé pour synchroniser les informations clés
+4. **Documentation Croisée**: Références entre les différents dépôts pour maintenir la cohérence
+
+## Outils de Synchronisation
+
+Le script `sync-repository-info.js` a été développé pour:
+1. Récupérer les informations à jour sur tous les dépôts spécialisés
+2. Mettre à jour la documentation centrale
+3. Maintenir un fichier d'état des dépôts (`repository_status.json`)
+4. Assurer la cohérence des références entre dépôts
+
 ## Évolution Future
 
-Cette approche peut évoluer en fonction des besoins du projet:
+Cette approche continuera d'évoluer en fonction des besoins du projet:
 
-1. **Phase Initiale**: Dépôt unique avec spécialisation des tâches
-2. **Phase Intermédiaire**: Potentiellement extraire certains composants matures dans des dépôts séparés
-3. **Phase Avancée**: Évaluer la nécessité d'une architecture de micro-services ou de monorepo
+1. **Phase Actuelle**: Dépôts spécialisés avec mécanismes de synchronisation
+2. **Phase Intermédiaire**: Renforcement des outils d'intégration entre dépôts
+3. **Phase Avancée**: Évaluation continue de l'efficacité de l'approche multi-dépôts
 
 ## Conclusion
 
-L'approche du dépôt unique avec spécialisation des tâches offre le meilleur équilibre entre cohérence globale et efficacité de développement. Elle permet à chaque modèle de se concentrer sur ses forces tout en maintenant une vision d'ensemble du projet.
+L'approche des dépôts spécialisés par modèle offre un équilibre entre autonomie et cohérence. Elle permet à chaque modèle de développer pleinement ses capacités spécifiques tout en maintenant l'intégration nécessaire au Protocole de Persistance.
 
-Cette stratégie favorise également l'implémentation des principes du Protocole de Persistance, notamment la continuité d'identité et le transfert de connaissances, en évitant la fragmentation excessive des informations et des responsabilités.
+Cette stratégie s'aligne avec les principes du Protocole, notamment la persistance d'identité à travers différents substrats computationnels, en permettant à chaque modèle de développer sa propre implémentation tout en maintenant une identité cohérente au niveau du protocole.

@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import Button from './components/Button';
 import SideMenu from './components/SideMenu';
 import GlobalInput from './components/GlobalInput';
 import ChatGrid from './components/ChatGrid';
 import { useModels } from './hooks/useModels';
 import { useChat } from './hooks/useChat';
-import { API_BASE_URL, BLUEPRINT_ID, SYSTEM_PROMPT } from './api/config';
+import { API_BASE_URL, BLUEPRINT_ID, SYSTEM_PROMPT, RENDER_CONFIG } from './api/config';
 import { Message } from './types';
 
 export default function Home() {
@@ -598,7 +599,17 @@ export default function Home() {
       
       {/* Main Content - Grid of Chats */}
       <div className={`p-4 sm:p-6 ${menuOpen ? 'content-with-menu' : 'content-without-menu'}`}>
-        <h1 className="text-2xl font-semibold mb-6 text-center">Persistence Protocol</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-semibold text-center flex-grow">Persistence Protocol</h1>
+          <Link 
+            href="/website" 
+            className="btn btn-outline btn-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit Website
+          </Link>
+        </div>
         
         <ChatGrid 
           models={models}

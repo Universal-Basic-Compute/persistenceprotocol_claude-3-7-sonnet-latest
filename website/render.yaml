@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: persistence-protocol-website
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start -p $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true

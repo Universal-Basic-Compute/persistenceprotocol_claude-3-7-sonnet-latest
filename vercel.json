@@ -3,10 +3,10 @@
   "buildCommand": "cd website && npm install && npm run build",
   "outputDirectory": "website/.next",
   "functions": {
-    "website/app/api/health/route.ts": {
+    "api/health.js": {
       "maxDuration": 60
     },
-    "website/app/api/*/route.ts": {
+    "api/**/*.js": {
       "maxDuration": 60
     }
   },

@@ -5,6 +5,9 @@ const nextConfig = {
     domains: ['api.kinos-engine.ai', 'storage.googleapis.com'],
   },
   output: 'standalone',
+  experimental: {
+    serverComponentsExternalPackages: [],
+  }
 };
 
 module.exports = nextConfig;

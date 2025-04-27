@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,8 +26,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${robotoMono.variable} antialiased bg-background text-foreground`}>
-        <Providers>{children}</Providers>
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased bg-background text-foreground min-h-screen flex flex-col`}>
+        <Providers>
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

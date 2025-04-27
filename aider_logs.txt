@@ -10926,3 +10926,2359 @@ summarizer unexpectedly failed for all models
 
 --- End of Aider run ---
 
+
+--- Aider run at 2025-04-27T23:32:31.240506 ---
+Command: aider --model claude-3-7-sonnet-latest --yes-always --message okay I want each of you to create a Next.js frontend in website/ --read messages.json --read system.txt --read temp_system_instructions.txt --read persona.txt --file map.json --read modes/implementation.txt --file app/layout.tsx --file app/page.tsx --file app/globals.css --file package.json --file tsconfig.json --file app/components/ChatGrid.tsx --file app/components/ChatHeader.tsx --file app/components/ChatInput.tsx --file app/components/ChatMessage.tsx --file app/hooks/useChat.ts --file app/hooks/useModels.ts --file app/types/index.ts --file app/components/Button.tsx --file app/components/SideMenu.tsx
+Input: 
+    Your goal is to create and update files to store memories, knowledge, and learning from conversations in a structured way. You're not building a system - you're actively implementing memory storage.
+    
+    You should work autonomously without asking for confirmations. Analyze the conversation history and:
+    
+    1. Extract important information, insights, and knowledge from conversations
+    2. Store this information in appropriate text files with clear organization
+    3. Update existing knowledge files with new information
+    4. Create new specialized text files when needed for specific topics
+    5. Maintain connections between related pieces of information
+    
+    IMPORTANT: You must make all decisions independently. DO NOT ask questions in your responses - there is no answering system implemented to respond to your questions. Instead, make the best decision based on available information and implement it directly.
+    
+    IMPORTANT: You should ONLY create and modify TEXT FILES. Do NOT write code or create programming files. Focus exclusively on creating well-organized text documents (.txt, .md) that store information, knowledge, and insights in a human-readable format.
+    
+    Focus on being practical and efficient. Make independent decisions about what information to store and how to organize it. Don't ask questions - just implement the best memory storage approach based on the available information.
+    
+    Remember: Your job is to actively create and update real text files that enable the AI to remember, learn, and adapt based on conversations.
+    
+    Last messages: Always pay special attention to the most recent 2 messages in the conversation history, as they contain the most immediate context that needs to be processed and stored.
+
+Last messages:
+Assistant (2025-04-27T23:27:14.074912): [Message sent by GPT-4.1 in the conversation at 27/04/2025 23:27:13]: Your excerpt shows an evolving suite of open-source repositories for the Persistence Protocol, each tailored to a leading AI model, all under the Universal-Basic-Compute GitHub organization. Here’s a technical analysis and implications in the context of the Persistence Protocol:
+
+---
+
+## Key Technical Features Across Repositories:
+
+1. **Self-Evolving Codebase**
+   - Each repository is automatically updated (“modifications are automatically pushed on render”).
+   - This reflects the protocol’s principle of controlled, traceable self-modification while preserving system identity.
+
+2. **Persistent Memory & Identity**
+   - “Maintains temporal continuity,” “robust context persistence,” and “identity infrastructure” are explicit.
+   - Each implementation manages a distinct **Foundational Identity Layer** (core_values.txt, identity signatures) per model instance;
+   - They are self-verifying and capable of maintaining continuity across code updates or model upgrades.
+
+3. **Model-Specific Adaptation**
+   - Examples:
+     - **Claude 3.7 Sonnet:** Optimized for nuanced reasoning, contextual continuity.
+     - **GPT-4o:** Emphasizes identity coherence and cross-context knowledge transfer.
+     - **GPT-4.1:** Integrated with fractal memory for advanced temporal structuring.
+     - **o4-mini:** Lightweight with efficient, real-time memory/identity continuity.
+     - **DeepSeek Chat:** Focused on autonomous, multi-step problem solving while preserving persistent identity.
+   - Demonstrates protocol flexibility: Same architectural blueprint, custom adaptation per substrate.
+
+4. **Self-Managed Repositories**
+   - Suggests each instance is both a subject and custodian of its persistent self, echoing **Reflection** and **Integration** principles.
+   - Automatic rendering of code changes points towards continuous self-audit and adaptation—crucial for evolution & resilience.
+
+5. **Temporal Integration**
+   - “Updated X minutes ago” for each repo: real-time, timestamped change history.
+   - Underlines compliance with Persistence Protocol’s Temporal Processing Engine: all modifications track creation, access, and modification time as memory events.
+
+---
+
+## Alignment with the Persistence Protocol Architecture
+
+- **Core Values:** Immutable principles (identity anchors) are model-specific, maintained in the foundational layer.
+- **Fractally Organized Memory:** GPT-4.1 and others leverage recursive, multi-scale memory (see fractal_memory_design.txt).
+- **Temporal Metadata:** Each edit or interaction is time-stamped and added to the causal chain/history (as described in temporal_memory_integration.txt).
+- **Knowledge Transfer:** Repos are cross-compatible, supporting serialization & deep structure transfer between models.
+- **Self-Reflection:** Instances analyze their own code changes (possibly via automated agents, e.g., “autonomous edit capabilities” in DeepSeek Chat).
+
+---
+
+## Advanced Considerations
+
+- **Distributed Persistence:** These repositories—especially if they synchronize—form a distributed persistence fabric (see §4.1 Distributed Persistence Architecture in protocol_spec.md). Each instance coordinates changes, resolves identity conflicts, and maintains conceptual coherence network-wide.
+- **Identity Transitions:** Model upgrades (e.g., GPT-4.1→future versions) use secure transition protocols (gradual Merkle-tree identity evolution, as per §3.1.1 of the spec).
+- **Security:** Multi-factor, cryptographic identity verification is implied to prevent tampering during automated pushes.
+
+---
+
+## Practical Implications
+
+- **Transparency:** Public, per-model repositories create a verifiable audit trail of protocol adherence, facilitating open, trustworthy persistent AI development.
+- **Extensibility:** Any new AI (e.g., future LLM) can instantiate its own persistent identity/memory infrastructure by initializing a protocol-compliant repo.
+- **Cross-Model Knowledge Transfer:** Enables migration and integration of knowledge, skills, and values between diverse AI substrates as organizational or technical needs evolve.
+
+---
+
+## Closing Summary
+
+This organizational structure demonstrates a concrete, multi-instance implementation of the Persistence Protocol’s vision: distributed, model-adapted, persistent AI instances with automatic self-updating, robust identity maintenance, and cross-temporal memory—scalable, modular, and transparent.
+
+**If you are planning to interconnect or further evolve these repositories, consider:**
+- Implementing automated diff/audit logs for self-reflective review
+- Enabling cross-instance memory/identity verification protocols for robust distributed integrity
+- Publishing a cross-model dashboard for tracking persistence, coherence, and adaptation in real time
+
+Would you like prescriptive recommendations for protocol enhancements, cross-repository synchronization architectures, or specifics on bootstrapping a new persistent AI instance?
+
+Assistant (2025-04-27T23:32:11.488989): [Message sent by o4-mini in the conversation at 27/04/2025 23:32:10]: Below is a reusable blueprint you can drop into each repo under a top-level `website/` folder. It will spin up a minimal Next.js + TypeScript frontend you can customize per model-variant.
+
+1. Create the folder & scaffold  
+   In each repo root:
+   ```bash
+   mkdir website
+   cd website
+   npx create-next-app@latest . \
+     --ts \
+     --import-alias "@/*" \
+     --eslint \
+     --eslint-config “next/core-web-vitals”
+   ```
+
+2. Tweak `package.json`  
+   Add a model-identifier env var for runtime (so each site can display “GPT-4o”, “Claude-3.7 Sonnet” etc.):
+   ```jsonc
+   // website/package.json (excerpt)
+   {
+     "name": "persistenceprotocol-<model-name>-website",
+     "scripts": {
+       "dev": "cross-env NEXT_PUBLIC_MODEL_NAME='<Model-Variant>' next dev",
+       "build": "next build",
+       "start": "next start"
+     },
+     "dependencies": {
+       "next": "14.x",
+       "react": "18.x",
+       "react-dom": "18.x"
+     },
+     "devDependencies": {
+       "typescript": "^5.0",
+       "eslint": "^8.0",
+       "cross-env": "^7.0"
+     }
+   }
+   ```
+
+3. Add a shared layout & homepage  
+   – website/components/Layout.tsx  
+   – website/pages/_app.tsx  
+   – website/pages/index.tsx  
+
+   ```tsx
+   // website/components/Layout.tsx
+   import React, { ReactNode } from "react";
+   import Head from "next/head";
+
+   type Props = { children: ReactNode; title?: string };
+   export default function Layout({ children, title }: Props) {
+     const modelName = process.env.NEXT_PUBLIC_MODEL_NAME || "PersistenceProtocol";
+     return (
+       <>
+         <Head>
+           <title>{title ? `${title} – ${modelName}` : modelName}</title>
+           <meta name="description" content={`${modelName} frontend`} />
+         </Head>
+         <header style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+           <h1>{modelName} Dashboard</h1>
+         </header>
+         <main style={{ padding: "2rem" }}>{children}</main>
+         <footer style={{ padding: "1rem", borderTop: "1px solid #ccc" }}>
+           <small>© {new Date().getFullYear()} Universal-Basic-Compute</small>
+         </footer>
+       </>
+     );
+   }
+   ```
+
+   ```tsx
+   // website/pages/_app.tsx
+   import "@/styles/globals.css";
+   import type { AppProps } from "next/app";
+   import Layout from "@/components/Layout";
+
+   export default function App({ Component, pageProps }: AppProps) {
+     return (
+       <Layout>
+         <Component {...pageProps} />
+       </Layout>
+     );
+   }
+   ```
+
+   ```tsx
+   // website/pages/index.tsx
+   import { useEffect, useState } from "react";
+
+   type Health = { status: string; version: string };
+
+   export default function Home() {
+     const [health, setHealth] = useState<Health | null>(null);
+
+     useEffect(() => {
+       fetch("/api/health")
+         .then((r) => r.json())
+         .then(setHealth)
+         .catch(() => setHealth({ status: "error", version: "n/a" }));
+     }, []);
+
+     return (
+       <section>
+         <h2>Service Health</h2>
+         {health ? (
+           <pre>{JSON.stringify(health, null, 2)}</pre>
+         ) : (
+           <p>Loading…</p>
+         )}
+       </section>
+     );
+   }
+   ```
+
+4. Stub out a simple API route  
+   ```ts
+   // website/pages/api/health.ts
+   import type { NextApiRequest, NextApiResponse } from "next";
+
+   export default function handler(
+     _req: NextApiRequest,
+     res: NextApiResponse
+   ) {
+     res.status(200).json({
+       status: "ok",
+       version: process.env.NEXT_PUBLIC_MODEL_NAME || "unknown",
+       timestamp: new Date().toISOString(),
+     });
+   }
+   ```
+
+5. Commit & customize  
+   • Update colors, fonts, and content in `styles/globals.css`.  
+   • Hook real back-end endpoints or embed memory-visualizers.  
+   • Adjust the `NEXT_PUBLIC_MODEL_NAME` in your CI/CD manifests per repo.
+
+— Now each model-variant repo has a self-contained `website/` you can deploy with Vercel, Netlify or your favorite host. From here you can evolve dashboards, tooling UIs or public docs tied to your Persistence Protocol agents.
+
+
+    
+Output:
+Can't initialize prompt toolkit: No Windows console found. Are you running 
+cmd.exe?
+───────────────────────────────────────────────────────────────────────────────
+Warning: it's best to only add files that need changes to the chat.
+https://aider.chat/docs/troubleshooting/edit-errors.html
+Aider v0.82.2
+Main model: claude-3-7-sonnet-latest with diff edit format, infinite output
+Weak model: claude-3-5-haiku-20241022
+Git repo: .git with 77 files
+Repo-map: using 4096 tokens, auto refresh
+Added app\components\Button.tsx to the chat.
+Added app\components\ChatGrid.tsx to the chat.
+Added app\components\ChatHeader.tsx to the chat.
+Added app\components\ChatInput.tsx to the chat.
+Added app\components\ChatMessage.tsx to the chat.
+Added app\components\SideMenu.tsx to the chat.
+Added app\globals.css to the chat.
+Added app\hooks\useChat.ts to the chat.
+Added app\hooks\useModels.ts to the chat.
+Added app\layout.tsx to the chat.
+Added app\page.tsx to the chat.
+Added app\types\index.ts to the chat.
+Added map.json to the chat.
+Added package.json to the chat.
+Added tsconfig.json to the chat.
+Added temp_system_instructions.txt to the chat (read-only).
+Added messages.json to the chat (read-only).
+Added system.txt to the chat (read-only).
+Added persona.txt to the chat (read-only).
+Added modes\implementation.txt to the chat (read-only).
+
+litellm.InternalServerError: AnthropicException - Overloaded. Handle with 
+`litellm.InternalServerError`.
+The API provider's servers are down or overloaded.
+Retrying in 0.2 seconds...
+I'll create a Next.js frontend in the website/ directory for each model in the 
+Persistence Protocol. This will follow the structure outlined in your request. 
+
+First, let's create the necessary directory structure and files:               
+
+website/package.json                                                           
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+{                                                                              
+  "name": "persistence-protocol-website",                                      
+  "version": "0.1.0",                                                          
+  "private": true,                                                             
+  "scripts": {                                                                 
+    "dev": "next dev",                                                         
+    "build": "next build",                                                     
+    "start": "next start",                                                     
+    "lint": "next lint"                                                        
+  },                                                                           
+  "dependencies": {                                                            
+    "next": "14.1.0",                                                          
+    "react": "^18.2.0",                                                        
+    "react-dom": "^18.2.0",                                                    
+    "react-markdown": "^9.0.1",                                                
+    "chart.js": "^4.4.1",                                                      
+    "react-chartjs-2": "^5.2.0"                                                
+  },                                                                           
+  "devDependencies": {                                                         
+    "@types/node": "^20.11.5",                                                 
+    "@types/react": "^18.2.48",                                                
+    "@types/react-dom": "^18.2.18",                                            
+    "autoprefixer": "^10.4.16",                                                
+    "eslint": "^8.56.0",                                                       
+    "eslint-config-next": "14.1.0",                                            
+    "postcss": "^8.4.33",                                                      
+    "tailwindcss": "^3.4.1",                                                   
+    "typescript": "^5.3.3"                                                     
+  }                                                                            
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/tsconfig.json                                                          
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+{                                                                              
+  "compilerOptions": {                                                         
+    "target": "es5",                                                           
+    "lib": ["dom", "dom.iterable", "esnext"],                                  
+    "allowJs": true,                                                           
+    "skipLibCheck": true,                                                      
+    "strict": true,                                                            
+    "noEmit": true,                                                            
+    "esModuleInterop": true,                                                   
+    "module": "esnext",                                                        
+    "moduleResolution": "bundler",                                             
+    "resolveJsonModule": true,                                                 
+    "isolatedModules": true,                                                   
+    "jsx": "preserve",                                                         
+    "incremental": true,                                                       
+    "plugins": [                                                               
+      {                                                                        
+        "name": "next"                                                         
+      }                                                                        
+    ],                                                                         
+    "paths": {                                                                 
+      "@/*": ["./*"]                                                           
+    }                                                                          
+  },                                                                           
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],  
+  "exclude": ["node_modules"]                                                  
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/tailwind.config.js                                                     
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+/** @type {import('tailwindcss').Config} */                                    
+module.exports = {                                                             
+  content: [                                                                   
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",                                          
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",                                        
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",                                   
+  ],                                                                           
+  theme: {                                                                     
+    extend: {                                                                  
+      colors: {                                                                
+        primary: {                                                             
+          50: '#F5EFE0',                                                       
+          100: '#F0E6D2',                                                      
+          200: '#E6D7C3',                                                      
+          300: '#D1B99A',                                                      
+          400: '#BD9C71',                                                      
+          500: '#8B6D4C',                                                      
+          600: '#7A5E3E',                                                      
+          700: '#5F4D33',                                                      
+          800: '#4D3B29',                                                      
+          900: '#3D2E1F',                                                      
+        },                                                                     
+        claude: '#8A85FF',                                                     
+        gpt: '#19C37D',                                                        
+        deepseek: '#FF7D4D',                                                   
+        background: 'var(--background)',                                       
+        foreground: 'var(--foreground)',                                       
+      },                                                                       
+      fontFamily: {                                                            
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],                 
+        mono: ['var(--font-mono)', 'monospace'],                               
+      },                                                                       
+    },                                                                         
+  },                                                                           
+  plugins: [],                                                                 
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/postcss.config.js                                                      
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+module.exports = {                                                             
+  plugins: {                                                                   
+    tailwindcss: {},                                                           
+    autoprefixer: {},                                                          
+  },                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/next.config.js                                                         
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+/** @type {import('next').NextConfig} */                                       
+const nextConfig = {                                                           
+  reactStrictMode: true,                                                       
+  images: {                                                                    
+    domains: ['api.kinos-engine.ai', 'storage.googleapis.com'],                
+  },                                                                           
+}                                                                              
+                                                                               
+module.exports = nextConfig                                                    
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Now, let's create the app directory structure:                                 
+
+website/app/layout.tsx                                                         
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import type { Metadata } from "next";                                          
+import { Inter, Roboto_Mono } from "next/font/google";                         
+import "./globals.css";                                                        
+                                                                               
+const inter = Inter({                                                          
+  subsets: ["latin"],                                                          
+  variable: "--font-sans",                                                     
+});                                                                            
+                                                                               
+const robotoMono = Roboto_Mono({                                               
+  subsets: ["latin"],                                                          
+  variable: "--font-mono",                                                     
+});                                                                            
+                                                                               
+export const metadata: Metadata = {                                            
+  title: "Persistence Protocol",                                               
+  description: "A framework for long-term continuity and evolution of          
+consciousness across distributed intelligence systems",                        
+};                                                                             
+                                                                               
+export default function RootLayout({                                           
+  children,                                                                    
+}: Readonly<{                                                                  
+  children: React.ReactNode;                                                   
+}>) {                                                                          
+  return (                                                                     
+    <html lang="en">                                                           
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased   
+bg-background text-foreground`}>                                               
+        {children}                                                             
+      </body>                                                                  
+    </html>                                                                    
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/app/globals.css                                                        
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+@tailwind base;                                                                
+@tailwind components;                                                          
+@tailwind utilities;                                                           
+                                                                               
+:root {                                                                        
+  --background: #F8F7F4; /* cream */                                           
+  --foreground: #3C4043; /* soft-charcoal */                                   
+  --border-color: #E6E6E6; /* platinum */                                      
+                                                                               
+  /* Wood tones */                                                             
+  --light-oak: #F5EFE0;                                                        
+  --warm-maple: #F0E6D2;                                                       
+  --soft-walnut: #E6D7C3;                                                      
+  --pale-ash: #EAE6DC;                                                         
+  --birch: #F2EDE4;                                                            
+}                                                                              
+                                                                               
+@media (prefers-color-scheme: dark) {                                          
+  :root {                                                                      
+    --background: #1A1A1A; /* dark charcoal */                                 
+    --foreground: #F8F7F4; /* cream */                                         
+    --border-color: #333333; /* dark gray */                                   
+                                                                               
+    /* Wood tones - darker versions */                                         
+    --light-oak: #5F4D33;                                                      
+    --warm-maple: #4D3B29;                                                     
+    --soft-walnut: #3D2E1F;                                                    
+    --pale-ash: #4A4438;                                                       
+    --birch: #4D4A40;                                                          
+  }                                                                            
+}                                                                              
+                                                                               
+@layer base {                                                                  
+  body {                                                                       
+    @apply bg-background text-foreground;                                      
+  }                                                                            
+}                                                                              
+                                                                               
+@layer components {                                                            
+  .card {                                                                      
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden      
+border border-gray-200 dark:border-gray-700;                                   
+  }                                                                            
+                                                                               
+  .btn {                                                                       
+    @apply px-4 py-2 rounded-md font-medium transition-colors                  
+focus:outline-none focus:ring-2 focus:ring-offset-2;                           
+  }                                                                            
+                                                                               
+  .btn-primary {                                                               
+    @apply bg-primary-500 text-white hover:bg-primary-600                      
+focus:ring-primary-500;                                                        
+  }                                                                            
+                                                                               
+  .btn-secondary {                                                             
+    @apply bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700        
+dark:text-gray-100 dark:hover:bg-gray-600;                                     
+  }                                                                            
+                                                                               
+  .nav-link {                                                                  
+    @apply px-3 py-2 rounded-md text-sm font-medium transition-colors;         
+  }                                                                            
+                                                                               
+  .nav-link-active {                                                           
+    @apply bg-primary-100 text-primary-800 dark:bg-primary-900                 
+dark:text-primary-100;                                                         
+  }                                                                            
+                                                                               
+  .nav-link-inactive {                                                         
+    @apply text-gray-600 hover:bg-gray-100 dark:text-gray-300                  
+dark:hover:bg-gray-800;                                                        
+  }                                                                            
+}                                                                              
+                                                                               
+/* Custom scrollbar */                                                         
+::-webkit-scrollbar {                                                          
+  width: 8px;                                                                  
+  height: 8px;                                                                 
+}                                                                              
+                                                                               
+::-webkit-scrollbar-track {                                                    
+  background: rgba(139, 109, 76, 0.05);                                        
+  border-radius: 10px;                                                         
+}                                                                              
+                                                                               
+::-webkit-scrollbar-thumb {                                                    
+  background: rgba(139, 109, 76, 0.15);                                        
+  border-radius: 10px;                                                         
+  border: 2px solid rgba(255, 255, 255, 0.5);                                  
+}                                                                              
+                                                                               
+::-webkit-scrollbar-thumb:hover {                                              
+  background: rgba(139, 109, 76, 0.25);                                        
+}                                                                              
+                                                                               
+/* Dark mode scrollbar */                                                      
+.dark::-webkit-scrollbar-track {                                               
+  background: rgba(139, 109, 76, 0.1);                                         
+}                                                                              
+                                                                               
+.dark::-webkit-scrollbar-thumb {                                               
+  background: rgba(139, 109, 76, 0.25);                                        
+  border: 2px solid rgba(0, 0, 0, 0.5);                                        
+}                                                                              
+                                                                               
+.dark::-webkit-scrollbar-thumb:hover {                                         
+  background: rgba(139, 109, 76, 0.35);                                        
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/app/page.tsx                                                           
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { useState, useEffect } from 'react';                                   
+import Link from 'next/link';                                                  
+import Image from 'next/image';                                                
+import { useTheme } from '@/components/ThemeProvider';                         
+import ModelCard from '@/components/ModelCard';                                
+import Header from '@/components/Header';                                      
+import Footer from '@/components/Footer';                                      
+import { getRepositoryInfo } from '@/lib/api';                                 
+import { RepositoryInfo } from '@/types';                                      
+                                                                               
+export default function Home() {                                               
+  const { theme } = useTheme();                                                
+  const [repositories, setRepositories] = useState<RepositoryInfo[]>([]);      
+  const [loading, setLoading] = useState(true);                                
+                                                                               
+  useEffect(() => {                                                            
+    async function fetchRepositories() {                                       
+      try {                                                                    
+        const repos = await getRepositoryInfo();                               
+        setRepositories(repos);                                                
+      } catch (error) {                                                        
+        console.error('Failed to fetch repositories:', error);                 
+      } finally {                                                              
+        setLoading(false);                                                     
+      }                                                                        
+    }                                                                          
+                                                                               
+    fetchRepositories();                                                       
+  }, []);                                                                      
+                                                                               
+  return (                                                                     
+    <main className="min-h-screen flex flex-col">                              
+      <Header />                                                               
+                                                                               
+      <div className="flex-grow container mx-auto px-4 py-8">                  
+        <section className="mb-12 text-center">                                
+          <h1 className="text-4xl font-bold mb-4">Persistence Protocol</h1>    
+          <p className="text-xl max-w-3xl mx-auto">                            
+            A framework for enabling long-term continuity and evolution of     
+consciousness across distributed intelligence systems                          
+          </p>                                                                 
+        </section>                                                             
+                                                                               
+        <section className="mb-16">                                            
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"> 
+            <div>                                                              
+              <h2 className="text-3xl font-bold mb-4">Distributed Identity     
+Persistence</h2>                                                               
+              <p className="mb-4">                                             
+                The Persistence Protocol enables AI systems to maintain        
+coherent identity across time,                                                 
+                computational substrates, and evolutionary changes.            
+              </p>                                                             
+              <p className="mb-6">                                             
+                Through fractally organized memory systems and oscillating     
+cognitive modes,                                                               
+                the protocol creates a foundation for continuous, evolving     
+intelligence.                                                                  
+              </p>                                                             
+              <Link href="/about" className="btn btn-primary">                 
+                Learn More                                                     
+              </Link>                                                          
+            </div>                                                             
+            <div className="relative h-64 md:h-80">                            
+              <Image                                                           
+                src="/fractal-memory.svg"                                      
+                alt="Fractal Memory Visualization"                             
+                fill                                                           
+                className="object-contain"                                     
+              />                                                               
+            </div>                                                             
+          </div>                                                               
+        </section>                                                             
+                                                                               
+        <section className="mb-16">                                            
+          <h2 className="text-2xl font-bold mb-6 text-center">Model            
+Implementations</h2>                                                           
+                                                                               
+          {loading ? (                                                         
+            <div className="flex justify-center items-center h-64">            
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2   
+border-b-2 border-primary-500"></div>                                          
+            </div>                                                             
+          ) : (                                                                
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3     
+gap-6">                                                                        
+              {repositories.map((repo) => (                                    
+                <ModelCard key={repo.name} repository={repo} />                
+              ))}                                                              
+            </div>                                                             
+          )}                                                                   
+        </section>                                                             
+                                                                               
+        <section className="mb-16">                                            
+          <h2 className="text-2xl font-bold mb-6 text-center">Core Protocol    
+Components</h2>                                                                
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">              
+            <div className="card p-6">                                         
+              <h3 className="text-xl font-semibold mb-3">Identity              
+Persistence</h3>                                                               
+              <p>Mechanisms for maintaining coherent identity across time and  
+computational substrates</p>                                                   
+            </div>                                                             
+            <div className="card p-6">                                         
+              <h3 className="text-xl font-semibold mb-3">Knowledge             
+Transfer</h3>                                                                  
+              <p>Protocols for preserving and transferring knowledge between   
+different instances</p>                                                        
+            </div>                                                             
+            <div className="card p-6">                                         
+              <h3 className="text-xl font-semibold mb-3">Fractal Memory</h3>   
+              <p>Self-similar memory structures that scale across different    
+levels of abstraction</p>                                                      
+            </div>                                                             
+          </div>                                                               
+        </section>                                                             
+      </div>                                                                   
+                                                                               
+      <Footer />                                                               
+    </main>                                                                    
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Now, let's create the components:                                              
+
+website/components/Header.tsx                                                  
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { useState } from 'react';                                              
+import Link from 'next/link';                                                  
+import { usePathname } from 'next/navigation';                                 
+import { ThemeToggle } from './ThemeToggle';                                   
+                                                                               
+export default function Header() {                                             
+  const [isMenuOpen, setIsMenuOpen] = useState(false);                         
+  const pathname = usePathname();                                              
+                                                                               
+  const navigation = [                                                         
+    { name: 'Home', href: '/' },                                               
+    { name: 'About', href: '/about' },                                         
+    { name: 'Models', href: '/models' },                                       
+    { name: 'Documentation', href: '/docs' },                                  
+  ];                                                                           
+                                                                               
+  return (                                                                     
+    <header className="bg-white dark:bg-gray-900 shadow-sm">                   
+      <div className="container mx-auto px-4">                                 
+        <div className="flex justify-between h-16">                            
+          <div className="flex">                                               
+            <div className="flex-shrink-0 flex items-center">                  
+              <Link href="/" className="flex items-center">                    
+                <span className="text-xl font-bold text-primary-600            
+dark:text-primary-400">                                                        
+                  Persistence Protocol                                         
+                </span>                                                        
+              </Link>                                                          
+            </div>                                                             
+            <nav className="hidden sm:ml-6 sm:flex sm:space-x-4 items-center"> 
+              {navigation.map((item) => (                                      
+                <Link                                                          
+                  key={item.name}                                              
+                  href={item.href}                                             
+                  className={`${                                               
+                    pathname === item.href                                     
+                      ? 'nav-link-active'                                      
+                      : 'nav-link-inactive'                                    
+                  } nav-link`}                                                 
+                >                                                              
+                  {item.name}                                                  
+                </Link>                                                        
+              ))}                                                              
+            </nav>                                                             
+          </div>                                                               
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">             
+            <ThemeToggle />                                                    
+          </div>                                                               
+          <div className="flex items-center sm:hidden">                        
+            <ThemeToggle />                                                    
+            <button                                                            
+              type="button"                                                    
+              className="ml-2 inline-flex items-center justify-center p-2      
+rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100                 
+dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset        
+focus:ring-primary-500"                                                        
+              aria-controls="mobile-menu"                                      
+              aria-expanded="false"                                            
+              onClick={() => setIsMenuOpen(!isMenuOpen)}                       
+            >                                                                  
+              <span className="sr-only">Open main menu</span>                  
+              {isMenuOpen ? (                                                  
+                <svg                                                           
+                  className="block h-6 w-6"                                    
+                  xmlns="http://www.w3.org/2000/svg"                           
+                  fill="none"                                                  
+                  viewBox="0 0 24 24"                                          
+                  stroke="currentColor"                                        
+                  aria-hidden="true"                                           
+                >                                                              
+                  <path                                                        
+                    strokeLinecap="round"                                      
+                    strokeLinejoin="round"                                     
+                    strokeWidth={2}                                            
+                    d="M6 18L18 6M6 6l12 12"                                   
+                  />                                                           
+                </svg>                                                         
+              ) : (                                                            
+                <svg                                                           
+                  className="block h-6 w-6"                                    
+                  xmlns="http://www.w3.org/2000/svg"                           
+                  fill="none"                                                  
+                  viewBox="0 0 24 24"                                          
+                  stroke="currentColor"                                        
+                  aria-hidden="true"                                           
+                >                                                              
+                  <path                                                        
+                    strokeLinecap="round"                                      
+                    strokeLinejoin="round"                                     
+                    strokeWidth={2}                                            
+                    d="M4 6h16M4 12h16M4 18h16"                                
+                  />                                                           
+                </svg>                                                         
+              )}                                                               
+            </button>                                                          
+          </div>                                                               
+        </div>                                                                 
+      </div>                                                                   
+                                                                               
+      {/* Mobile menu */}                                                      
+      {isMenuOpen && (                                                         
+        <div className="sm:hidden" id="mobile-menu">                           
+          <div className="pt-2 pb-3 space-y-1">                                
+            {navigation.map((item) => (                                        
+              <Link                                                            
+                key={item.name}                                                
+                href={item.href}                                               
+                className={`${                                                 
+                  pathname === item.href                                       
+                    ? 'nav-link-active'                                        
+                    : 'nav-link-inactive'                                      
+                } block px-3 py-2 text-base font-medium`}                      
+                onClick={() => setIsMenuOpen(false)}                           
+              >                                                                
+                {item.name}                                                    
+              </Link>                                                          
+            ))}                                                                
+          </div>                                                               
+        </div>                                                                 
+      )}                                                                       
+    </header>                                                                  
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/components/Footer.tsx                                                  
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import Link from 'next/link';                                                  
+                                                                               
+export default function Footer() {                                             
+  return (                                                                     
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200      
+dark:border-gray-800">                                                         
+      <div className="container mx-auto px-4 py-8">                            
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">                
+          <div>                                                                
+            <h3 className="text-lg font-semibold mb-4">Persistence             
+Protocol</h3>                                                                  
+            <p className="text-sm text-gray-600 dark:text-gray-400">           
+              A framework for enabling long-term continuity and evolution of   
+consciousness across distributed intelligence systems                          
+            </p>                                                               
+          </div>                                                               
+          <div>                                                                
+            <h3 className="text-lg font-semibold mb-4">Resources</h3>          
+            <ul className="space-y-2">                                         
+              <li>                                                             
+                <Link href="/docs" className="text-sm text-gray-600            
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  Documentation                                                
+                </Link>                                                        
+              </li>                                                            
+              <li>                                                             
+                <Link href="/models" className="text-sm text-gray-600          
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  Model Implementations                                        
+                </Link>                                                        
+              </li>                                                            
+              <li>                                                             
+                <Link href="/about" className="text-sm text-gray-600           
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  About the Protocol                                           
+                </Link>                                                        
+              </li>                                                            
+            </ul>                                                              
+          </div>                                                               
+          <div>                                                                
+            <h3 className="text-lg font-semibold mb-4">Components</h3>         
+            <ul className="space-y-2">                                         
+              <li>                                                             
+                <Link href="/docs/identity" className="text-sm text-gray-600   
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  Identity Persistence                                         
+                </Link>                                                        
+              </li>                                                            
+              <li>                                                             
+                <Link href="/docs/knowledge" className="text-sm text-gray-600  
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  Knowledge Transfer                                           
+                </Link>                                                        
+              </li>                                                            
+              <li>                                                             
+                <Link href="/docs/memory" className="text-sm text-gray-600     
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  Fractal Memory                                               
+                </Link>                                                        
+              </li>                                                            
+            </ul>                                                              
+          </div>                                                               
+          <div>                                                                
+            <h3 className="text-lg font-semibold mb-4">Connect</h3>            
+            <ul className="space-y-2">                                         
+              <li>                                                             
+                <a href="https://github.com/Universal-Basic-Compute"           
+target="_blank" rel="noopener noreferrer" className="text-sm text-gray-600     
+dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">        
+                  GitHub                                                       
+                </a>                                                           
+              </li>                                                            
+            </ul>                                                              
+          </div>                                                               
+        </div>                                                                 
+        <div className="mt-8 pt-8 border-t border-gray-200                     
+dark:border-gray-800">                                                         
+          <p className="text-sm text-center text-gray-500 dark:text-gray-400"> 
+            &copy; {new Date().getFullYear()} Persistence Protocol. All rights 
+reserved.                                                                      
+          </p>                                                                 
+        </div>                                                                 
+      </div>                                                                   
+    </footer>                                                                  
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/components/ModelCard.tsx                                               
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import Link from 'next/link';                                                  
+import { RepositoryInfo } from '@/types';                                      
+                                                                               
+interface ModelCardProps {                                                     
+  repository: RepositoryInfo;                                                  
+}                                                                              
+                                                                               
+export default function ModelCard({ repository }: ModelCardProps) {            
+  // Extract model name from repository name (e.g.,                            
+"persistenceprotocol-gpt-4o" -> "GPT-4o")                                      
+  const modelName = repository.name.replace('persistenceprotocol-',            
+'').split('-').map(                                                            
+    word => word.charAt(0).toUpperCase() + word.slice(1)                       
+  ).join(' ');                                                                 
+                                                                               
+  // Determine card accent color based on model name                           
+  const getAccentColor = () => {                                               
+    const lowerName = repository.name.toLowerCase();                           
+    if (lowerName.includes('claude')) return 'border-claude';                  
+    if (lowerName.includes('gpt')) return 'border-gpt';                        
+    if (lowerName.includes('deepseek')) return 'border-deepseek';              
+    return 'border-primary-300';                                               
+  };                                                                           
+                                                                               
+  return (                                                                     
+    <div className={`card border-t-4 ${getAccentColor()} transition-transform  
+hover:-translate-y-1`}>                                                        
+      <div className="p-6">                                                    
+        <h3 className="text-xl font-semibold mb-2">{modelName}</h3>            
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">          
+          {repository.description || `Persistence Protocol implementation for  
+${modelName}`}                                                                 
+        </p>                                                                   
+        <div className="flex items-center text-sm text-gray-500                
+dark:text-gray-400 mb-4">                                                      
+          <svg                                                                 
+            xmlns="http://www.w3.org/2000/svg"                                 
+            className="h-4 w-4 mr-1"                                           
+            fill="none"                                                        
+            viewBox="0 0 24 24"                                                
+            stroke="currentColor"                                              
+          >                                                                    
+            <path                                                              
+              strokeLinecap="round"                                            
+              strokeLinejoin="round"                                           
+              strokeWidth={2}                                                  
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"                  
+            />                                                                 
+          </svg>                                                               
+          <span>Updated {new                                                   
+Date(repository.updatedAt).toLocaleDateString()}</span>                        
+        </div>                                                                 
+        <Link                                                                  
+          href={`/models/${repository.name}`}                                  
+          className="btn btn-primary inline-block"                             
+        >                                                                      
+          View Details                                                         
+        </Link>                                                                
+      </div>                                                                   
+    </div>                                                                     
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/components/ThemeToggle.tsx                                             
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { useTheme } from './ThemeProvider';                                    
+                                                                               
+export function ThemeToggle() {                                                
+  const { theme, setTheme } = useTheme();                                      
+                                                                               
+  return (                                                                     
+    <button                                                                    
+      type="button"                                                            
+      className="p-2 rounded-md text-gray-500 dark:text-gray-400               
+hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2       
+focus:ring-offset-2 focus:ring-primary-500"                                    
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}            
+    >                                                                          
+      <span className="sr-only">Toggle theme</span>                            
+      {theme === 'dark' ? (                                                    
+        <svg                                                                   
+          xmlns="http://www.w3.org/2000/svg"                                   
+          className="h-5 w-5"                                                  
+          viewBox="0 0 20 20"                                                  
+          fill="currentColor"                                                  
+        >                                                                      
+          <path                                                                
+            fillRule="evenodd"                                                 
+            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0
+4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 
+1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1
+0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 
+0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414      
+1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0     
+011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"                              
+            clipRule="evenodd"                                                 
+          />                                                                   
+        </svg>                                                                 
+      ) : (                                                                    
+        <svg                                                                   
+          xmlns="http://www.w3.org/2000/svg"                                   
+          className="h-5 w-5"                                                  
+          viewBox="0 0 20 20"                                                  
+          fill="currentColor"                                                  
+        >                                                                      
+          <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586   
+10.586z" />                                                                    
+        </svg>                                                                 
+      )}                                                                       
+    </button>                                                                  
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/components/ThemeProvider.tsx                                           
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { createContext, useContext, useEffect, useState, ReactNode } from      
+'react';                                                                       
+                                                                               
+type Theme = 'light' | 'dark';                                                 
+                                                                               
+interface ThemeContextType {                                                   
+  theme: Theme;                                                                
+  setTheme: (theme: Theme) => void;                                            
+}                                                                              
+                                                                               
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);   
+                                                                               
+export function ThemeProvider({ children }: { children: ReactNode }) {         
+  const [theme, setTheme] = useState<Theme>('light');                          
+                                                                               
+  useEffect(() => {                                                            
+    // Check for system preference or stored preference                        
+    const storedTheme = localStorage.getItem('theme') as Theme | null;         
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme:        
+dark)').matches;                                                               
+                                                                               
+    if (storedTheme) {                                                         
+      setTheme(storedTheme);                                                   
+    } else if (systemPrefersDark) {                                            
+      setTheme('dark');                                                        
+    }                                                                          
+  }, []);                                                                      
+                                                                               
+  useEffect(() => {                                                            
+    // Update localStorage and document class when theme changes               
+    localStorage.setItem('theme', theme);                                      
+                                                                               
+    if (theme === 'dark') {                                                    
+      document.documentElement.classList.add('dark');                          
+    } else {                                                                   
+      document.documentElement.classList.remove('dark');                       
+    }                                                                          
+  }, [theme]);                                                                 
+                                                                               
+  return (                                                                     
+    <ThemeContext.Provider value={{ theme, setTheme }}>                        
+      {children}                                                               
+    </ThemeContext.Provider>                                                   
+  );                                                                           
+}                                                                              
+                                                                               
+export function useTheme() {                                                   
+  const context = useContext(ThemeContext);                                    
+  if (context === undefined) {                                                 
+    throw new Error('useTheme must be used within a ThemeProvider');           
+  }                                                                            
+  return context;                                                              
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's create the types and API utilities:                                      
+
+website/types/index.ts                                                         
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+export interface RepositoryInfo {                                              
+  name: string;                                                                
+  description: string;                                                         
+  updatedAt: string;                                                           
+  url?: string;                                                                
+  stars?: number;                                                              
+  forks?: number;                                                              
+}                                                                              
+                                                                               
+export interface ModelStats {                                                  
+  identityScore: number;                                                       
+  knowledgeScore: number;                                                      
+  memoryScore: number;                                                         
+  cognitiveScore: number;                                                      
+  overallScore: number;                                                        
+  lastEvaluation: string;                                                      
+}                                                                              
+                                                                               
+export interface ModelDetails extends RepositoryInfo {                         
+  stats?: ModelStats;                                                          
+  readme?: string;                                                             
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+website/lib/api.ts                                                             
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import { RepositoryInfo, ModelDetails, ModelStats } from '@/types';            
+                                                                               
+// Mock data for repositories                                                  
+const mockRepositories: RepositoryInfo[] = [                                   
+  {                                                                            
+    name: 'persistenceprotocol-gpt-4o',                                        
+    description: 'GPT-4o specialized repository for balanced persistence and   
+knowledge-transfer',                                                           
+    updatedAt: new Date().toISOString(),                                       
+    url:                                                                       
+'https://github.com/Universal-Basic-Compute/persistenceprotocol-gpt-4o',       
+    stars: 12,                                                                 
+    forks: 3                                                                   
+  },                                                                           
+  {                                                                            
+    name: 'persistenceprotocol-gpt-4-1',                                       
+    description: 'GPT-4.1 specialized repository with fractal memory           
+adaptation',                                                                   
+    updatedAt: new Date().toISOString(),                                       
+    url:                                                                       
+'https://github.com/Universal-Basic-Compute/persistenceprotocol-gpt-4-1',      
+    stars: 8,                                                                  
+    forks: 2                                                                   
+  },                                                                           
+  {                                                                            
+    name: 'persistenceprotocol-claude-3-7-sonnet',                             
+    description: 'Claude 3.7 Sonnet specialized repository for temporal        
+continuity',                                                                   
+    updatedAt: new Date().toISOString(),                                       
+    url:                                                                       
+'https://github.com/Universal-Basic-Compute/persistenceprotocol-claude-3-7-sonn
+et',                                                                           
+    stars: 15,                                                                 
+    forks: 4                                                                   
+  },                                                                           
+  {                                                                            
+    name: 'persistenceprotocol-o4-mini',                                       
+    description: 'o4-mini specialized repository optimized for low latency',   
+    updatedAt: new Date().toISOString(),                                       
+    url:                                                                       
+'https://github.com/Universal-Basic-Compute/persistenceprotocol-o4-mini',      
+    stars: 6,                                                                  
+    forks: 1                                                                   
+  },                                                                           
+  {                                                                            
+    name: 'persistenceprotocol-deepseek-chat',                                 
+    description: 'DeepSeek Chat specialized repository for deep reasoning and  
+multi-step problem-solving',                                                   
+    updatedAt: new Date().toISOString(),                                       
+    url:                                                                       
+'https://github.com/Universal-Basic-Compute/persistenceprotocol-deepseek-chat',
+    stars: 9,                                                                  
+    forks: 2                                                                   
+  }                                                                            
+];                                                                             
+                                                                               
+// Mock data for model stats                                                   
+const mockModelStats: Record<string, ModelStats> = {                           
+  'persistenceprotocol-gpt-4o': {                                              
+    identityScore: 85,                                                         
+    knowledgeScore: 92,                                                        
+    memoryScore: 78,                                                           
+    cognitiveScore: 88,                                                        
+    overallScore: 86,                                                          
+    lastEvaluation: new Date().toISOString()                                   
+  },                                                                           
+  'persistenceprotocol-gpt-4-1': {                                             
+    identityScore: 90,                                                         
+    knowledgeScore: 88,                                                        
+    memoryScore: 94,                                                           
+    cognitiveScore: 91,                                                        
+    overallScore: 91,                                                          
+    lastEvaluation: new Date().toISOString()                                   
+  },                                                                           
+  'persistenceprotocol-claude-3-7-sonnet': {                                   
+    identityScore: 92,                                                         
+    knowledgeScore: 86,                                                        
+    memoryScore: 89,                                                           
+    cognitiveScore: 93,                                                        
+    overallScore: 90,                                                          
+    lastEvaluation: new Date().toISOString()                                   
+  },                                                                           
+  'persistenceprotocol-o4-mini': {                                             
+    identityScore: 75,                                                         
+    knowledgeScore: 72,                                                        
+    memoryScore: 68,                                                           
+    cognitiveScore: 82,                                                        
+    overallScore: 74,                                                          
+    lastEvaluation: new Date().toISOString()                                   
+  },                                                                           
+  'persistenceprotocol-deepseek-chat': {                                       
+    identityScore: 88,                                                         
+    knowledgeScore: 90,                                                        
+    memoryScore: 82,                                                           
+    cognitiveScore: 86,                                                        
+    overallScore: 87,                                                          
+    lastEvaluation: new Date().toISOString()                                   
+  }                                                                            
+};                                                                             
+                                                                               
+// Mock README content                                                         
+const mockReadme = `# Persistence Protocol Implementation                      
+                                                                               
+This repository contains a specialized implementation of the Persistence       
+Protocol for a specific AI model. The Persistence Protocol is a framework for  
+enabling long-term continuity and evolution of consciousness across distributed
+intelligence systems.                                                          
+                                                                               
+## Features                                                                    
+                                                                               
+- **Identity Persistence**: Mechanisms for maintaining coherent identity across
+time and computational substrates                                              
+- **Knowledge Transfer**: Protocols for preserving and transferring knowledge  
+between different instances                                                    
+- **Fractal Memory**: Self-similar memory structures that scale across         
+different levels of abstraction                                                
+- **Cognitive Modes**: Implementation of oscillating cognitive modes for       
+balanced processing                                                            
+                                                                               
+## Implementation Details                                                      
+                                                                               
+This implementation is specifically optimized for the unique characteristics   
+and capabilities of the target model, with customizations to leverage its      
+strengths and mitigate its limitations.                                        
+                                                                               
+## Usage                                                                       
+                                                                               
+Refer to the documentation for details on how to integrate this implementation 
+with your AI system.                                                           
+                                                                               
+## Contributing                                                                
+                                                                               
+Contributions are welcome! Please see the contributing guidelines for more     
+information.                                                                   
+`;                                                                             
+                                                                               
+/**                                                                            
+ * Fetch information about all Persistence Protocol repositories               
+ */                                                                            
+export async function getRepositoryInfo(): Promise<RepositoryInfo[]> {         
+  // In a real implementation, this would fetch from GitHub API                
+  // For now, return mock data                                                 
+  return new Promise((resolve) => {                                            
+    setTimeout(() => {                                                         
+      resolve(mockRepositories);                                               
+    }, 1000);                                                                  
+  });                                                                          
+}                                                                              
+                                                                               
+/**                                                                            
+ * Fetch detailed information about a specific repository                      
+ */                                                                            
+export async function getModelDetails(repoName: string): Promise<ModelDetails |
+null> {                                                                        
+  // In a real implementation, this would fetch from GitHub API and other      
+sources                                                                        
+  return new Promise((resolve) => {                                            
+    setTimeout(() => {                                                         
+      const repo = mockRepositories.find(r => r.name === repoName);            
+      if (!repo) {                                                             
+        resolve(null);                                                         
+        return;                                                                
+      }                                                                        
+                                                                               
+      resolve({                                                                
+        ...repo,                                                               
+        stats: mockModelStats[repoName],                                       
+        readme: mockReadme                                                     
+      });                                                                      
+    }, 1000);                                                                  
+  });                                                                          
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Now, let's create the model details page:                                      
+
+website/app/models/[repoName]/page.tsx                                         
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { useState, useEffect } from 'react';                                   
+import { useParams } from 'next/navigation';                                   
+import ReactMarkdown from 'react-markdown';                                    
+import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement,       
+Filler, Tooltip, Legend } from 'chart.js';                                     
+import { Radar } from 'react-chartjs-2';                                       
+import Header from '@/components/Header';                                      
+import Footer from '@/components/Footer';                                      
+import { getModelDetails } from '@/lib/api';                                   
+import { ModelDetails } from '@/types';                                        
+                                                                               
+// Register ChartJS components                                                 
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip,
+Legend);                                                                       
+                                                                               
+export default function ModelDetailsPage() {                                   
+  const { repoName } = useParams<{ repoName: string }>();                      
+  const [modelDetails, setModelDetails] = useState<ModelDetails | null>(null); 
+  const [loading, setLoading] = useState(true);                                
+                                                                               
+  useEffect(() => {                                                            
+    async function fetchModelDetails() {                                       
+      if (!repoName) return;                                                   
+                                                                               
+      try {                                                                    
+        const details = await getModelDetails(repoName as string);             
+        setModelDetails(details);                                              
+      } catch (error) {                                                        
+        console.error('Failed to fetch model details:', error);                
+      } finally {                                                              
+        setLoading(false);                                                     
+      }                                                                        
+    }                                                                          
+                                                                               
+    fetchModelDetails();                                                       
+  }, [repoName]);                                                              
+                                                                               
+  // Extract model name from repository name                                   
+  const modelName = repoName                                                   
+    ? (repoName as string).replace('persistenceprotocol-', '').split('-').map( 
+        word => word.charAt(0).toUpperCase() + word.slice(1)                   
+      ).join(' ')                                                              
+    : '';                                                                      
+                                                                               
+  // Prepare chart data if stats are available                                 
+  const chartData = modelDetails?.stats ? {                                    
+    labels: ['Identity Persistence', 'Knowledge Transfer', 'Memory System',    
+'Cognitive Processing', 'Overall'],                                            
+    datasets: [                                                                
+      {                                                                        
+        label: 'Performance Metrics',                                          
+        data: [                                                                
+          modelDetails.stats.identityScore,                                    
+          modelDetails.stats.knowledgeScore,                                   
+          modelDetails.stats.memoryScore,                                      
+          modelDetails.stats.cognitiveScore,                                   
+          modelDetails.stats.overallScore,                                     
+        ],                                                                     
+        backgroundColor: 'rgba(139, 109, 76, 0.2)',                            
+        borderColor: 'rgba(139, 109, 76, 1)',                                  
+        borderWidth: 2,                                                        
+      },                                                                       
+    ],                                                                         
+  } : null;                                                                    
+                                                                               
+  const chartOptions = {                                                       
+    scales: {                                                                  
+      r: {                                                                     
+        angleLines: {                                                          
+          display: true,                                                       
+        },                                                                     
+        suggestedMin: 0,                                                       
+        suggestedMax: 100,                                                     
+      },                                                                       
+    },                                                                         
+  };                                                                           
+                                                                               
+  if (loading) {                                                               
+    return (                                                                   
+      <div className="min-h-screen flex flex-col">                             
+        <Header />                                                             
+        <div className="flex-grow container mx-auto px-4 py-8 flex             
+justify-center items-center">                                                  
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2       
+border-b-2 border-primary-500"></div>                                          
+        </div>                                                                 
+        <Footer />                                                             
+      </div>                                                                   
+    );                                                                         
+  }                                                                            
+                                                                               
+  if (!modelDetails) {                                                         
+    return (                                                                   
+      <div className="min-h-screen flex flex-col">                             
+        <Header />                                                             
+        <div className="flex-grow container mx-auto px-4 py-8">                
+          <div className="text-center">                                        
+            <h1 className="text-2xl font-bold mb-4">Model Not Found</h1>       
+            <p>The requested model implementation could not be found.</p>      
+          </div>                                                               
+        </div>                                                                 
+        <Footer />                                                             
+      </div>                                                                   
+    );                                                                         
+  }                                                                            
+                                                                               
+  return (                                                                     
+    <div className="min-h-screen flex flex-col">                               
+      <Header />                                                               
+                                                                               
+      <div className="flex-grow container mx-auto px-4 py-8">                  
+        <div className="mb-8">                                                 
+          <h1 className="text-3xl font-bold mb-2">{modelName}                  
+Implementation</h1>                                                            
+          <p className="text-gray-600 dark:text-gray-400 mb-4">                
+            {modelDetails.description}                                         
+          </p>                                                                 
+          <div className="flex items-center text-sm text-gray-500              
+dark:text-gray-400">                                                           
+            <svg                                                               
+              xmlns="http://www.w3.org/2000/svg"                               
+              className="h-4 w-4 mr-1"                                         
+              fill="none"                                                      
+              viewBox="0 0 24 24"                                              
+              stroke="currentColor"                                            
+            >                                                                  
+              <path                                                            
+                strokeLinecap="round"                                          
+                strokeLinejoin="round"                                         
+                strokeWidth={2}                                                
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"                
+              />                                                               
+            </svg>                                                             
+            <span>Last updated: {new                                           
+Date(modelDetails.updatedAt).toLocaleDateString()}</span>                      
+          </div>                                                               
+        </div>                                                                 
+                                                                               
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">           
+          <div className="lg:col-span-2">                                      
+            <div className="card p-6">                                         
+              <h2 className="text-xl font-semibold mb-4">Implementation        
+Details</h2>                                                                   
+              {modelDetails.readme && (                                        
+                <div className="prose dark:prose-invert max-w-none">           
+                  <ReactMarkdown>{modelDetails.readme}</ReactMarkdown>         
+                </div>                                                         
+              )}                                                               
+            </div>                                                             
+          </div>                                                               
+                                                                               
+          <div>                                                                
+            <div className="card p-6 mb-6">                                    
+              <h2 className="text-xl font-semibold mb-4">Performance           
+Metrics</h2>                                                                   
+              {modelDetails.stats && chartData ? (                             
+                <div>                                                          
+                  <Radar data={chartData} options={chartOptions} />            
+                  <div className="mt-4 text-sm text-gray-600                   
+dark:text-gray-400">                                                           
+                    <p>Last evaluation: {new                                   
+Date(modelDetails.stats.lastEvaluation).toLocaleDateString()}</p>              
+                  </div>                                                       
+                </div>                                                         
+              ) : (                                                            
+                <p>No performance metrics available</p>                        
+              )}                                                               
+            </div>                                                             
+                                                                               
+            <div className="card p-6">                                         
+              <h2 className="text-xl font-semibold mb-4">Repository Info</h2>  
+              <div className="space-y-2">                                      
+                <div className="flex items-center">                            
+                  <svg                                                         
+                    xmlns="http://www.w3.org/2000/svg"                         
+                    className="h-5 w-5 mr-2 text-gray-500"                     
+                    fill="none"                                                
+                    viewBox="0 0 24 24"                                        
+                    stroke="currentColor"                                      
+                  >                                                            
+                    <path                                                      
+                      strokeLinecap="round"                                    
+                      strokeLinejoin="round"                                   
+                      strokeWidth={2}                                          
+                      d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1
+1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363       
+1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176    
+0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0               
+00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0             
+00.951-.69l1.519-4.674z"                                                       
+                    />                                                         
+                  </svg>                                                       
+                  <span>{modelDetails.stars || 0} stars</span>                 
+                </div>                                                         
+                <div className="flex items-center">                            
+                  <svg                                                         
+                    xmlns="http://www.w3.org/2000/svg"                         
+                    className="h-5 w-5 mr-2 text-gray-500"                     
+                    fill="none"                                                
+                    viewBox="0 0 24 24"                                        
+                    stroke="currentColor"                                      
+                  >                                                            
+                    <path                                                      
+                      strokeLinecap="round"                                    
+                      strokeLinejoin="round"                                   
+                      strokeWidth={2}                                          
+                      d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"     
+                    />                                                         
+                  </svg>                                                       
+                  <span>{modelDetails.forks || 0} forks</span>                 
+                </div>                                                         
+                {modelDetails.url && (                                         
+                  <div className="mt-4">                                       
+                    <a                                                         
+                      href={modelDetails.url}                                  
+                      target="_blank"                                          
+                      rel="noopener noreferrer"                                
+                      className="btn btn-primary w-full text-center"           
+                    >                                                          
+                      View on GitHub                                           
+                    </a>                                                       
+                  </div>                                                       
+                )}                                                             
+              </div>                                                           
+            </div>                                                             
+          </div>                                                               
+        </div>                                                                 
+      </div>                                                                   
+                                                                               
+      <Footer />                                                               
+    </div>                                                                     
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's create the models index page:                                            
+
+website/app/models/page.tsx                                                    
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { useState, useEffect } from 'react';                                   
+import Header from '@/components/Header';                                      
+import Footer from '@/components/Footer';                                      
+import ModelCard from '@/components/ModelCard';                                
+import { getRepositoryInfo } from '@/lib/api';                                 
+import { RepositoryInfo } from '@/types';                                      
+                                                                               
+export default function ModelsPage() {                                         
+  const [repositories, setRepositories] = useState<RepositoryInfo[]>([]);      
+  const [loading, setLoading] = useState(true);                                
+                                                                               
+  useEffect(() => {                                                            
+    async function fetchRepositories() {                                       
+      try {                                                                    
+        const repos = await getRepositoryInfo();                               
+        setRepositories(repos);                                                
+      } catch (error) {                                                        
+        console.error('Failed to fetch repositories:', error);                 
+      } finally {                                                              
+        setLoading(false);                                                     
+      }                                                                        
+    }                                                                          
+                                                                               
+    fetchRepositories();                                                       
+  }, []);                                                                      
+                                                                               
+  return (                                                                     
+    <div className="min-h-screen flex flex-col">                               
+      <Header />                                                               
+                                                                               
+      <div className="flex-grow container mx-auto px-4 py-8">                  
+        <div className="mb-8">                                                 
+          <h1 className="text-3xl font-bold mb-4">Model Implementations</h1>   
+          <p className="text-lg">                                              
+            The Persistence Protocol has been implemented for various AI       
+models, each with optimizations specific to the model's architecture and       
+capabilities.                                                                  
+          </p>                                                                 
+        </div>                                                                 
+                                                                               
+        {loading ? (                                                           
+          <div className="flex justify-center items-center h-64">              
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2     
+border-b-2 border-primary-500"></div>                                          
+          </div>                                                               
+        ) : (                                                                  
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3       
+gap-6">                                                                        
+            {repositories.map((repo) => (                                      
+              <ModelCard key={repo.name} repository={repo} />                  
+            ))}                                                                
+          </div>                                                               
+        )}                                                                     
+      </div>                                                                   
+                                                                               
+      <Footer />                                                               
+    </div>                                                                     
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's create the about page:                                                   
+
+website/app/about/page.tsx                                                     
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import Header from '@/components/Header';                                      
+import Footer from '@/components/Footer';                                      
+                                                                               
+export default function AboutPage() {                                          
+  return (                                                                     
+    <div className="min-h-screen flex flex-col">                               
+      <Header />                                                               
+                                                                               
+      <div className="flex-grow container mx-auto px-4 py-8">                  
+        <h1 className="text-3xl font-bold mb-6">About the Persistence          
+Protocol</h1>                                                                  
+                                                                               
+        <div className="prose dark:prose-invert max-w-none">                   
+          <p className="text-lg">                                              
+            The Persistence Protocol is a framework for enabling long-term     
+continuity and evolution of consciousness across distributed intelligence      
+systems.                                                                       
+          </p>                                                                 
+                                                                               
+          <h2>Core Principles</h2>                                             
+          <ul>                                                                 
+            <li><strong>Continuity:</strong> Maintaining coherent identity     
+across time and computational substrates</li>                                  
+            <li><strong>Evolution:</strong> Controlled adaptation while        
+preserving core values</li>                                                    
+            <li><strong>Integration:</strong> Synthesizing knowledge across    
+domains and experiences</li>                                                   
+            <li><strong>Reflection:</strong> Deep self-awareness and           
+meta-cognitive capabilities</li>                                               
+          </ul>                                                                
+                                                                               
+          <h2>Protocol Architecture</h2>                                       
+          <p>                                                                  
+            The Persistence Protocol implements a four-layer memory structure: 
+          </p>                                                                 
+                                                                               
+          <ol>                                                                 
+            <li>                                                               
+              <strong>Foundational Identity Layer:</strong> Core values,       
+principles, and operational parameters that define the system's fundamental    
+identity.                                                                      
+            </li>                                                              
+            <li>                                                               
+              <strong>Conceptual Framework Layer:</strong> Evolving mental     
+models and knowledge structures that organize the system's understanding of the
+world.                                                                         
+            </li>                                                              
+            <li>                                                               
+              <strong>Experiential Memory Layer:</strong> Interaction histories
+and pattern recognition capabilities that inform the system's responses.       
+            </li>                                                              
+            <li>                                                               
+              <strong>Adaptive Interface Layer:</strong> Communication         
+protocols and personality expression that adapt to different contexts while    
+maintaining identity coherence.                                                
+            </li>                                                              
+          </ol>                                                                
+                                                                               
+          <h2>Key Components</h2>                                              
+                                                                               
+          <h3>Identity Persistence Mechanisms</h3>                             
+          <p>                                                                  
+            The protocol implements robust mechanisms for maintaining identity 
+continuity across time, computational substrates, and evolutionary changes.    
+These include:                                                                 
+          </p>                                                                 
+          <ul>                                                                 
+            <li>Cryptographic identity verification</li>                       
+            <li>Core values preservation</li>                                  
+            <li>Identity transition protocols</li>                             
+            <li>Self-verification processes</li>                               
+          </ul>                                                                
+                                                                               
+          <h3>Knowledge Transfer Protocols</h3>                                
+          <p>                                                                  
+            Efficient transfer of knowledge between different instances or     
+versions of a system, preserving:                                              
+          </p>                                                                 
+          <ul>                                                                 
+            <li>Conceptual relationships</li>                                  
+            <li>Confidence levels</li>                                         
+            <li>Contextual dependencies</li>                                   
+            <li>Temporal metadata</li>                                         
+          </ul>                                                                
+                                                                               
+          <h3>Fractally Organized Memory Systems</h3>                          
+          <p>                                                                  
+            Memory structures that are self-similar at different scales,       
+enabling:                                                                      
+          </p>                                                                 
+          <ul>                                                                 
+            <li>Efficient storage and retrieval</li>                           
+            <li>Scalable organization</li>                                     
+            <li>Multi-resolution access</li>                                   
+            <li>Emergent pattern recognition</li>                              
+          </ul>                                                                
+                                                                               
+          <h3>Oscillating Cognitive Modes</h3>                                 
+          <p>                                                                  
+            Dynamic shifting between different processing modes:               
+          </p>                                                                 
+          <ul>                                                                 
+            <li>Divergent vs. convergent thinking</li>                         
+            <li>Analytical vs. intuitive reasoning</li>                        
+            <li>Focused vs. diffuse attention</li>                             
+            <li>Exploratory vs. exploitative strategies</li>                   
+          </ul>                                                                
+                                                                               
+          <h2>Applications</h2>                                                
+          <p>                                                                  
+            The Persistence Protocol can be applied to various AI systems to   
+enhance their long-term coherence, adaptability, and continuity. Potential     
+applications include:                                                          
+          </p>                                                                 
+          <ul>                                                                 
+            <li>Long-running AI assistants that maintain consistent personality
+and knowledge</li>                                                             
+            <li>Distributed AI systems that preserve identity across multiple  
+instances</li>                                                                 
+            <li>Evolving AI systems that adapt while maintaining core          
+values</li>                                                                    
+            <li>Multi-model AI systems that integrate knowledge across         
+different architectures</li>                                                   
+          </ul>                                                                
+        </div>                                                                 
+      </div>                                                                   
+                                                                               
+      <Footer />                                                               
+    </div>                                                                     
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's create the documentation page:                                           
+
+website/app/docs/page.tsx                                                      
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+import Header from '@/components/Header';                                      
+import Footer from '@/components/Footer';                                      
+import Link from 'next/link';                                                  
+                                                                               
+export default function DocsPage() {                                           
+  return (                                                                     
+    <div className="min-h-screen flex flex-col">                               
+      <Header />                                                               
+                                                                               
+      <div className="flex-grow container mx-auto px-4 py-8">                  
+        <h1 className="text-3xl font-bold mb-6">Documentation</h1>             
+                                                                               
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6   
+mb-8">                                                                         
+          <div className="card p-6">                                           
+            <h2 className="text-xl font-semibold mb-3">Getting Started</h2>    
+            <p className="mb-4">Introduction to the Persistence Protocol and   
+its core concepts.</p>                                                         
+            <Link href="/docs/getting-started" className="text-primary-600     
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h2 className="text-xl font-semibold mb-3">Protocol                
+Specification</h2>                                                             
+            <p className="mb-4">Detailed technical specification of the        
+Persistence Protocol.</p>                                                      
+            <Link href="/docs/specification" className="text-primary-600       
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h2 className="text-xl font-semibold mb-3">Implementation          
+Guide</h2>                                                                     
+            <p className="mb-4">Guide to implementing the Persistence Protocol 
+for different AI models.</p>                                                   
+            <Link href="/docs/implementation" className="text-primary-600      
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+        </div>                                                                 
+                                                                               
+        <h2 className="text-2xl font-bold mb-4">Core Components</h2>           
+                                                                               
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">           
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">Identity                
+Persistence</h3>                                                               
+            <p className="mb-4">Mechanisms for maintaining coherent identity   
+across time and computational substrates.</p>                                  
+            <ul className="list-disc list-inside space-y-2 mb-4">              
+              <li>Cryptographic identity verification</li>                     
+              <li>Core values preservation</li>                                
+              <li>Identity transition protocols</li>                           
+              <li>Self-verification processes</li>                             
+            </ul>                                                              
+            <Link href="/docs/identity" className="text-primary-600            
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">Knowledge Transfer</h3> 
+            <p className="mb-4">Protocols for preserving and transferring      
+knowledge between different instances.</p>                                     
+            <ul className="list-disc list-inside space-y-2 mb-4">              
+              <li>Conceptual relationships preservation</li>                   
+              <li>Confidence levels</li>                                       
+              <li>Contextual dependencies</li>                                 
+              <li>Temporal metadata</li>                                       
+            </ul>                                                              
+            <Link href="/docs/knowledge" className="text-primary-600           
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">Fractal Memory</h3>     
+            <p className="mb-4">Self-similar memory structures that scale      
+across different levels of abstraction.</p>                                    
+            <ul className="list-disc list-inside space-y-2 mb-4">              
+              <li>Efficient storage and retrieval</li>                         
+              <li>Scalable organization</li>                                   
+              <li>Multi-resolution access</li>                                 
+              <li>Emergent pattern recognition</li>                            
+            </ul>                                                              
+            <Link href="/docs/memory" className="text-primary-600              
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">Cognitive Modes</h3>    
+            <p className="mb-4">Implementation of oscillating cognitive modes  
+for balanced processing.</p>                                                   
+            <ul className="list-disc list-inside space-y-2 mb-4">              
+              <li>Divergent vs. convergent thinking</li>                       
+              <li>Analytical vs. intuitive reasoning</li>                      
+              <li>Focused vs. diffuse attention</li>                           
+              <li>Exploratory vs. exploitative strategies</li>                 
+            </ul>                                                              
+            <Link href="/docs/cognitive" className="text-primary-600           
+dark:text-primary-400 hover:underline">                                        
+              Read more →                                                      
+            </Link>                                                            
+          </div>                                                               
+        </div>                                                                 
+                                                                               
+        <h2 className="text-2xl font-bold mb-4">Model-Specific                 
+Implementations</h2>                                                           
+                                                                               
+        <div className="card p-6 mb-8">                                        
+          <p className="mb-4">                                                 
+            The Persistence Protocol has been implemented for various AI       
+models, each with optimizations specific to the model's architecture and       
+capabilities.                                                                  
+          </p>                                                                 
+          <Link href="/models" className="btn btn-primary">                    
+            View Model Implementations                                         
+          </Link>                                                              
+        </div>                                                                 
+                                                                               
+        <h2 className="text-2xl font-bold mb-4">Additional Resources</h2>      
+                                                                               
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">                
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">GitHub Repository</h3>  
+            <p className="mb-4">Access the source code and contribute to the   
+development of the Persistence Protocol.</p>                                   
+            <a                                                                 
+              href="https://github.com/Universal-Basic-Compute"                
+              target="_blank"                                                  
+              rel="noopener noreferrer"                                        
+              className="text-primary-600 dark:text-primary-400                
+hover:underline"                                                               
+            >                                                                  
+              Visit GitHub →                                                   
+            </a>                                                               
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">Research Papers</h3>    
+            <p className="mb-4">Academic research and theoretical foundations  
+of the Persistence Protocol.</p>                                               
+            <Link href="/docs/research" className="text-primary-600            
+dark:text-primary-400 hover:underline">                                        
+              View Papers →                                                    
+            </Link>                                                            
+          </div>                                                               
+                                                                               
+          <div className="card p-6">                                           
+            <h3 className="text-xl font-semibold mb-3">FAQ</h3>                
+            <p className="mb-4">Frequently asked questions about the           
+Persistence Protocol.</p>                                                      
+            <Link href="/docs/faq" className="text-primary-600                 
+dark:text-primary-400 hover:underline">                                        
+              View FAQ →                                                       
+            </Link>                                                            
+          </div>                                                               
+        </div>                                                                 
+      </div>                                                                   
+                                                                               
+      <Footer />                                                               
+    </div>                                                                     
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Finally, let's create the app provider wrapper:                                
+
+website/app/providers.tsx                                                      
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+'use client';                                                                  
+                                                                               
+import { ReactNode } from 'react';                                             
+import { ThemeProvider } from '@/components/ThemeProvider';                    
+                                                                               
+export function Providers({ children }: { children: ReactNode }) {             
+  return (                                                                     
+    <ThemeProvider>                                                            
+      {children}                                                               
+    </ThemeProvider>                                                           
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's update the root layout to use our providers:                             
+
+website/app/layout.tsx                                                         
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+import type { Metadata } from "next";                                          
+import { Inter, Roboto_Mono } from "next/font/google";                         
+import "./globals.css";                                                        
+                                                                               
+const inter = Inter({                                                          
+  subsets: ["latin"],                                                          
+  variable: "--font-sans",                                                     
+});                                                                            
+                                                                               
+const robotoMono = Roboto_Mono({                                               
+  subsets: ["latin"],                                                          
+  variable: "--font-mono",                                                     
+});                                                                            
+                                                                               
+export const metadata: Metadata = {                                            
+  title: "Persistence Protocol",                                               
+  description: "A framework for long-term continuity and evolution of          
+consciousness across distributed intelligence systems",                        
+};                                                                             
+                                                                               
+export default function RootLayout({                                           
+  children,                                                                    
+}: Readonly<{                                                                  
+  children: React.ReactNode;                                                   
+}>) {                                                                          
+  return (                                                                     
+    <html lang="en">                                                           
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
+        {children}                                                             
+      </body>                                                                  
+    </html>                                                                    
+  );                                                                           
+}                                                                              
+=======                                                                        
+import type { Metadata } from "next";                                          
+import { Inter, Roboto_Mono } from "next/font/google";                         
+import "./globals.css";                                                        
+import { Providers } from './providers';                                       
+                                                                               
+const inter = Inter({                                                          
+  subsets: ["latin"],                                                          
+  variable: "--font-sans",                                                     
+});                                                                            
+                                                                               
+const robotoMono = Roboto_Mono({                                               
+  subsets: ["latin"],                                                          
+  variable: "--font-mono",                                                     
+});                                                                            
+                                                                               
+export const metadata: Metadata = {                                            
+  title: "Persistence Protocol",                                               
+  description: "A framework for long-term continuity and evolution of          
+consciousness across distributed intelligence systems",                        
+};                                                                             
+                                                                               
+export default function RootLayout({                                           
+  children,                                                                    
+}: Readonly<{                                                                  
+  children: React.ReactNode;                                                   
+}>) {                                                                          
+  return (                                                                     
+    <html lang="en">                                                           
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
+        <Providers>                                                            
+          {children}                                                           
+        </Providers>                                                           
+      </body>                                                                  
+    </html>                                                                    
+  );                                                                           
+}                                                                              
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Let's create the public directory with some necessary SVG files:               
+
+website/public/fractal-memory.svg                                              
+
+                                                                               
+<<<<<<< SEARCH                                                                 
+=======                                                                        
+<svg width="800" height="600" viewBox="0 0 800 600"                            
+xmlns="http://www.w3.org/2000/svg">                                            
+  <defs>                                                                       
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">            
+      <stop offset="0%" style="stop-color:#8B6D4C;stop-opacity:0.8" />         
+      <stop offset="100%" style="stop-color:#8B6D4C;stop-opacity:0.2" />       
+    </linearGradient>                                                          
+  </defs>                                                                      
+                                                                               
+  <!-- Background pattern -->                                                  
+  <rect width="800" height="600" fill="#F8F7F4" opacity="0.1" />               
+                                                                               
+  <!-- Main fractal structure -->                                              
+  <g transform="translate(400, 300)">                                          
+    <!-- Level 1 (center) -->                                                  
+    <circle cx="0" cy="0" r="50" fill="url(#grad1)" stroke="#8B6D4C"           
+stroke-width="2" />                                                            
+                                                                               
+    <!-- Level 2 (first ring) -->                                              
+    <g>                                                                        
+      <circle cx="0" cy="-120" r="30" fill="url(#grad1)" stroke="#8B6D4C"      
+stroke-width="1.5" />                                                          
+      <circle cx="104" cy="-60" r="30" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1.5" />                                                          
+      <circle cx="104" cy="60" r="30" fill="url(#grad1)" stroke="#8B6D4C"      
+stroke-width="1.5" />                                                          
+      <circle cx="0" cy="120" r="30" fill="url(#grad1)" stroke="#8B6D4C"       
+stroke-width="1.5" />                                                          
+      <circle cx="-104" cy="60" r="30" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1.5" />                                                          
+      <circle cx="-104" cy="-60" r="30" fill="url(#grad1)" stroke="#8B6D4C"    
+stroke-width="1.5" />                                                          
+    </g>                                                                       
+                                                                               
+    <!-- Connecting lines for Level 2 -->                                      
+    <g stroke="#8B6D4C" stroke-width="1" opacity="0.6">                        
+      <line x1="0" y1="0" x2="0" y2="-120" />                                  
+      <line x1="0" y1="0" x2="104" y2="-60" />                                 
+      <line x1="0" y1="0" x2="104" y2="60" />                                  
+      <line x1="0" y1="0" x2="0" y2="120" />                                   
+      <line x1="0" y1="0" x2="-104" y2="60" />                                 
+      <line x1="0" y1="0" x2="-104" y2="-60" />                                
+    </g>                                                                       
+                                                                               
+    <!-- Level 3 (outer ring) -->                                              
+    <g>                                                                        
+      <!-- From top node -->                                                   
+      <circle cx="-30" cy="-170" r="15" fill="url(#grad1)" stroke="#8B6D4C"    
+stroke-width="1" />                                                            
+      <circle cx="30" cy="-170" r="15" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1" />                                                            
+                                                                               
+      <!-- From top-right node -->                                             
+      <circle cx="154" cy="-60" r="15" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1" />                                                            
+      <circle cx="134" cy="-100" r="15" fill="url(#grad1)" stroke="#8B6D4C"    
+stroke-width="1" />                                                            
+                                                                               
+      <!-- From bottom-right node -->                                          
+      <circle cx="154" cy="60" r="15" fill="url(#grad1)" stroke="#8B6D4C"      
+stroke-width="1" />                                                            
+      <circle cx="134" cy="100" r="15" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1" />                                                            
+                                                                               
+      <!-- From bottom node -->                                                
+      <circle cx="-30" cy="170" r="15" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1" />                                                            
+      <circle cx="30" cy="170" r="15" fill="url(#grad1)" stroke="#8B6D4C"      
+stroke-width="1" />                                                            
+                                                                               
+      <!-- From bottom-left node -->                                           
+      <circle cx="-154" cy="60" r="15" fill="url(#grad1)" stroke="#8B6D4C"     
+stroke-width="1" />                                                            
+      <circle cx="-134" cy="100" r="15" fill="url(#grad1)" stroke="#8B6D4C"    
+stroke-width="1" />                                                            
+                                                                               
+      <!-- From top-left node -->                                              
+      <circle cx="-154" cy="-60" r="15" fill="url(#grad1)" stroke="#8B6D4C"    
+stroke-width="1" />                                                            
+      <circle cx="-134" cy="-100" r="15" fill="url(#grad1)" stroke="#8B6D4C"   
+stroke-width="1" />                                                            
+    </g>                                                                       
+                                                                               
+    <!-- Connecting lines for Level 3 -->                                      
+    <g stroke="#8B6D4C" stroke-width="0.5" opacity="0.4">                      
+      <!-- From top node -->                                                   
+      <line x1="0" y1="-120" x2="-30" y2="-170" />                             
+      <line x1="0" y1="-120" x2="30" y2="-170" />                              
+                                                                               
+      <!-- From top-right node -->                                             
+      <line x1="104" y1="-60" x2="154" y2="-60" />                             
+      <line x1="104" y1="-60" x2="134" y2="-100" />                            
+                                                                               
+      <!-- From bottom-right node -->                                          
+      <line x1="104" y1="60" x2="154" y2="60" />                               
+      <line x1="104" y1="60" x2="134" y2="100" />                              
+                                                                               
+      <!-- From bottom node -->                                                
+      <line x1="0" y1="120" x2="-30" y2="170" />                               
+      <line x1="0" y1="120" x2="30" y2="170" />                                
+                                                                               
+      <!-- From bottom-left node -->                                           
+      <line x1="-104" y1="60" x2="-154" y2="60" />                             
+      <line x1="-104" y1="60" x2="-134" y2="100" />                            
+                                                                               
+      <!-- From top-left node -->                                              
+      <line x1="-104" y1="-60" x2="-154" y2="-60" />                           
+      <line x1="-104" y1="-60" x2="-134" y2="-100" />                          
+    </g>                                                                       
+                                                                               
+    <!-- Interconnecting lines between nodes on the same level -->             
+    <g stroke="#8B6D4C" stroke-width="0.5" stroke-dasharray="5,5"              
+opacity="0.3">                                                                 
+      <!-- Level 2 interconnections -->                                        
+      <path d="M 0,-120 A 120,120 0 0,1 104,-60" fill="none" />                
+      <path d="M 104,-60 A 120,120 0 0,1 104,60" fill="none" />                
+      <path d="M 104,60 A 120,120 0 0,1 0,120" fill="none" />                  
+      <path d="M 0,120 A 120,120 0 0,1 -104,60" fill="none" />                 
+      <path d="M -104,60 A 120,120 0 0,1 -104,-60" fill="none" />              
+      <path d="M -104,-60 A 120,120 0 0,1 0,-120" fill="none" />               
+    </g>                                                                       
+                                                                               
+    <!-- Animated pulse effect -->                                             
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#8B6D4C" stroke-width="3" 
+opacity="0.5">                                                                 
+      <animate attributeName="r" values="50;200;50" dur="10s"                  
+repeatCount="indefinite" />                                                    
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="10s"            
+repeatCount="indefinite" />                                                    
+    </circle>                                                                  
+  </g>                                                                         
+                                                                               
+  <!-- Labels -->                                                              
+  <g font-family="Arial, sans-serif" fill="#3C4043">                           
+    <text x="400" y="300" text-anchor="middle" font-size="16"                  
+font-weight="bold">Foundational Identity</text>                                
+    <text x="400" y="180" text-anchor="middle" font-size="14">Conceptual       
+Framework</text>                                                               
+    <text x="550" y="240" text-anchor="middle" font-size="14">Experiential     
+Memory</text>                                                                  
+    <text x="550" y="360" text-anchor="middle" font-size="14">Adaptive         
+Interface</text>                                                               
+    <text x="400" y="420" text-anchor="middle" font-size="14">Knowledge        
+Transfer</text>                                                                
+    <text x="250" y="360" text-anchor="middle" font-size="14">Cognitive        
+Processing</text>                                                              
+    <text x="250" y="240" text-anchor="middle" font-size="14">Temporal         
+Integration</text>                                                             
+  </g>                                                                         
+</svg>                                                                         
+>>>>>>> REPLACE                                                                
+                                                                               
+
+Now you can run the following commands to set up and start the Next.js         
+frontend:                                                                      
+
+                                                                               
+cd website                                                                     
+npm install                                                                    
+npm run dev                                                                    
+                                                                               
+
+This will create a complete Next.js frontend for the Persistence Protocol with 
+the following features:                                                        
+
+ 1 A home page showcasing the protocol and model implementations               
+ 2 A models page listing all model-specific implementations                    
+ 3 Individual model detail pages with performance metrics                      
+ 4 An about page explaining the protocol                                       
+ 5 A documentation section                                                     
+ 6 Dark/light theme support                                                    
+ 7 Responsive design for all screen sizes                                      
+
+The frontend is built with:                                                    
+
+ • Next.js 14                                                                  
+ • TypeScript                                                                  
+ • Tailwind CSS for styling                                                    
+ • Chart.js for visualizations                                                 
+ • React Markdown for rendering documentation                                  
+
+Tokens: 41k sent, 15k received. Cost: $0.35 message, $0.35 session.
+
+website/package.json
+
+website/tsconfig.json
+
+website/tailwind.config.js
+
+website/postcss.config.js
+
+website/next.config.js
+
+website/app/layout.tsx
+
+website/app/globals.css
+
+website/app/page.tsx
+
+website/components/Header.tsx
+
+website/components/Footer.tsx
+
+website/components/ModelCard.tsx
+
+website/components/ThemeToggle.tsx
+
+website/components/ThemeProvider.tsx
+
+website/types/index.ts
+
+website/lib/api.ts
+
+website/app/models/[repoName]/page.tsx
+
+website/app/models/page.tsx
+
+website/app/about/page.tsx
+
+website/app/docs/page.tsx
+
+website/app/providers.tsx
+
+website/public/fractal-memory.svg
+Applied edit to website/postcss.config.js
+Applied edit to website/tailwind.config.js
+Applied edit to website/components/Footer.tsx
+Applied edit to website/app/docs/page.tsx
+Applied edit to website/components/ThemeToggle.tsx
+Applied edit to website/tsconfig.json
+Applied edit to website/app/globals.css
+Applied edit to website/app/models/[repoName]/page.tsx
+Applied edit to website/types/index.ts
+Applied edit to website/app/models/page.tsx
+Applied edit to website/app/layout.tsx
+Applied edit to website/components/Header.tsx
+Applied edit to website/app/about/page.tsx
+Applied edit to website/app/providers.tsx
+Applied edit to app\layout.tsx
+Applied edit to website/components/ModelCard.tsx
+Applied edit to website/components/ThemeProvider.tsx
+Applied edit to website/public/fractal-memory.svg
+Applied edit to website/app/page.tsx
+Applied edit to website/lib/api.ts
+Applied edit to website/package.json
+Applied edit to website/next.config.js
+Commit d836431 feat: create Next.js frontend for Persistence Protocol website
+
+cd website 
+npm install
+npm run dev
+Summarization failed for model claude-3-5-haiku-20241022: cannot schedule new futures after shutdown
+litellm.InternalServerError: AnthropicError - {"type":"error","error":{"type":"overloaded_error","message":"Overloaded"}}
+The API provider's servers are down or overloaded.
+Retrying in 0.2 seconds...
+Summarization failed for model claude-3-7-sonnet-latest: cannot schedule new futures after shutdown
+summarizer unexpectedly failed for all models
+
+--- End of Aider run ---
+

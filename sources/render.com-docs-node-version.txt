@@ -1,0 +1,22 @@
+Source URL: https://render.com/docs/node-version
+Extracted on: 2025-04-27T23:50:13.812696
+
+Setting Your Node.js Version – Render DocsProductPlatform OverviewFeaturesAutoscalingPrivate NetworkingRender PostgresRender Key ValuePersistent DisksInfrastructure as CodePreview EnvironmentsZero Downtime DeploysRender APIServicesStatic SitesWeb ServicesPrivate ServicesBackground WorkersCron JobsRender PostgresRender Key ValuePricingCustomersBlogDocsChangelogCompanyAbout UsCareersPressContactSign InGet StartedDocumentationSearchAsk AIStartHomeYour first deployFree instancesProfessional featuresMigrate from HerokuFAQService typesWhich to use?Static sitesWeb servicesPrivate servicesBackground workersCron jobsMulti-service architecturesDeployingHow deploys workSupported languagesBuild pipelineDeploy hooksTroubleshooting deploysGit providersGitHubGitLabBitbucketDeploying a specific commitMonorepo supportDocker imagesDocker on RenderDeploy from a registryUsing secretsRuntimeNative runtimesEnvironment variables & secretsDefault environment variablesDatastoresPersistent disksKey Value (Redis®-compatible)Creating & connectingValkey/Redis FAQPostgres databasesOverviewCreating & connectingRecovery & backupsRead replicasHigh availabilityAdmin appsExtensionsConnection poolingVersion upgradesTroubleshooting performanceFlexible plansLegacy instance typesNetworkingRegionsPrivate networkOutbound IPsTLS certificatesCustom domainsOverviewCloudflareNamecheapOther DNS providersOperational ControlsThe Render DashboardProjects & environmentsService actionsScalingService previewsRollbacksMaintenance modeOne-off jobsInfrastructure as codeBlueprints overviewrender.yaml referencePreview environmentsTerraform providerMonitoring & LogsNotificationsHealth checksUptime best practicesMetricsIn-dashboard metricsOpenTelemetry streamingNewLoggingIn-dashboard logsSyslog streamingSSHOverviewGenerate a keyAdd a keyTroubleshooting SSHIntegrationsWebhooksNewCLIREST APIOverviewAPI referenceThird-party toolsDatadogScout APMStripeQuotaGuard Static IPFormspreeUser ManagementWorkspaces, members, & rolesLogin settingsEnterprise organizationsOrg overviewSAML SSONewAudit logsPlatform ProtectionsDDoS protectionPlatform maintenanceComplianceOverviewHIPAA (US health data)Shared responsibility modelCompareHeroku vs RenderVercel vs RenderSetting Your Node.js VersionCurrent default Node.js version
+22.12.0
+Services created before 2024-12-16 have a different default version. See below.
+Set a different Node.js version in any of the following ways (in descending order of precedence):
+Set the NODE_VERSION environment variable for your service in the Render Dashboard:
+Add a file named .node-version to the root of your repo. This file contains a single line with the version to use:
+text18.18.0
+Add a file named .nvmrc to the root of your repo. This file uses the same format as .node-version.
+Specify a Node.js version range in your package.json file, under the engines property:
+json"engines": {
+"node": ">=18.18.0 <19.0.0"}
+If there isn't a package.json file in your repo's root directory, Render uses the first package.json file it finds in a subdirectory.
+Always include an upper bound in your version range.
+An unbounded range (such as >=18) always resolves to the latest release of Node.js, which increments its major version over time. This might result in unexpected behavior or incompatibilities with your development version.
+You can specify either a semantic version number (such as 18.18.0) or an alias (such as lts).
+Render uses the node-version-alias module to resolve version aliases and semver ranges.
+History of default Node.js versions
+If you don't set a Node.js version for your service, Render's default version depends on when you originally created the service:
+Service Creation DateDefault Node.js Version2024-12-16 and later22.12.02024-11-24 to 2024-12-1622.11.02024-10-30 to 2024-11-2422.10.02024-07-09 to 2024-10-3020.15.12024-04-17 to 2024-07-0920.12.22024-04-04 to 2024-04-1720.12.12024-03-27 to 2024-04-0420.12.02024-02-23 to 2024-03-2720.11.12023-11-29 to 2024-02-2320.10.0Before 2023-11-0114.17.0Setting Your Node.js VersionHistory of default Node.js versionsXLinkedInGitHub© Render 2025

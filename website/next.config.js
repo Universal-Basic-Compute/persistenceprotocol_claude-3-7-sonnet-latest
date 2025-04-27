@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['api.kinos-engine.ai', 'storage.googleapis.com'],
   },
   // For Vercel serverless deployment
-  output: 'serverless',
+  output: 'standalone',
 }
 
 module.exports = nextConfig

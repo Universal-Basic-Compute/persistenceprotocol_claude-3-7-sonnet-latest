@@ -1,0 +1,145 @@
+# Stratégie de Déploiement Multi-Plateforme pour le Protocole de Persistance
+
+Ce document définit l'approche recommandée pour le déploiement des sites web et applications du Protocole de Persistance sur différentes plateformes.
+
+## Plateformes de Déploiement Supportées
+
+Le Protocole de Persistance prend en charge deux plateformes principales de déploiement:
+
+1. **Vercel** - Plateforme optimisée pour les applications Next.js (recommandée)
+2. **Render.com** - Plateforme alternative de déploiement
+
+## Avantages de Chaque Plateforme
+
+### Vercel
+
+- **Optimisé pour Next.js**: Support natif et optimisé pour les applications Next.js
+- **Déploiements Atomiques**: Chaque déploiement est immuable et instantanément réversible
+- **Intégration GitHub**: Déploiements automatiques à partir des branches GitHub
+- **Edge Network**: CDN global pour des performances optimales
+- **Serverless Functions**: Support natif des fonctions serverless
+- **Previews Automatiques**: Génération automatique de previews pour chaque pull request
+
+### Render.com
+
+- **Polyvalence**: Supporte une large gamme de technologies (Node.js, Python, Ruby, etc.)
+- **Conteneurisation**: Utilise Docker pour une isolation complète
+- **Services Variés**: Supporte les bases de données, services de fond, etc.
+- **Configuration YAML**: Configuration déclarative via render.yaml
+- **Scaling Automatique**: Scaling automatique des services en fonction de la charge
+
+## Stratégie de Déploiement
+
+### 1. Déploiement Spécifique par Modèle
+
+Chaque modèle d'IA est associé à une plateforme de déploiement préférée en fonction de ses besoins spécifiques:
+
+| Modèle | Plateforme Préférée | Justification |
+|--------|---------------------|---------------|
+| Claude 3.7 Sonnet | Vercel | Optimisé pour les interfaces riches et interactives |
+| DeepSeek Chat | Render.com | Intégration avec des services d'analyse complexes |
+| o4-mini | Vercel | Optimisé pour la rapidité et la légèreté |
+| GPT-4.1 | Vercel | Performances optimales pour les applications Next.js |
+| GPT-4o | Vercel | Support optimal pour les applications multimodales |
+
+### 2. Configuration Multi-Environnement
+
+Pour chaque dépôt, nous maintenons:
+
+- **vercel.json**: Configuration pour le déploiement sur Vercel
+- **render.yaml**: Configuration pour le déploiement sur Render.com
+- **next.config.js**: Configuration adaptative selon la plateforme de déploiement
+
+## Mise en Œuvre
+
+### 1. Script de Déploiement Unifié
+
+Le script `deploy-website.js` a été mis à jour pour prendre en charge les deux plateformes:
+
+```bash
+# Déployer sur Vercel (par défaut)
+npm run deploy
+
+# Déployer explicitement sur Vercel
+npm run deploy:vercel
+
+# Déployer sur Render.com
+npm run deploy:render
+```
+
+### 2. Configuration Adaptative
+
+Le fichier `next.config.js` détecte automatiquement l'environnement de déploiement:
+
+```javascript
+// Conditionally set output based on deployment platform
+output: process.env.VERCEL ? undefined : 'standalone',
+```
+
+### 3. Variables d'Environnement
+
+Les variables d'environnement sont configurées dans:
+- `vercel.json` pour Vercel
+- `render.yaml` pour Render.com
+
+Une variable `NEXT_PUBLIC_DEPLOYMENT_PLATFORM` est injectée pour permettre aux applications de détecter la plateforme de déploiement.
+
+## Intégration avec les Kins
+
+Les scripts de gestion des Kins ont été mis à jour pour prendre en charge la plateforme de déploiement:
+
+### 1. Création des Kins
+
+```bash
+# Créer des Kins avec leurs plateformes préférées
+npm run create-kins
+
+# Créer des Kins spécifiquement pour Vercel
+npm run create-kins:vercel
+
+# Créer des Kins spécifiquement pour Render.com
+npm run create-kins:render
+```
+
+### 2. Liaison des Kins aux Dépôts
+
+```bash
+# Lier les Kins aux dépôts avec leurs plateformes préférées
+npm run link-kins
+
+# Lier les Kins aux dépôts spécifiquement pour Vercel
+npm run link-kins:vercel
+
+# Lier les Kins aux dépôts spécifiquement pour Render.com
+npm run link-kins:render
+```
+
+### 3. Métadonnées de Déploiement
+
+Les Kins sont désormais créés avec des métadonnées indiquant leur plateforme de déploiement préférée, ce qui permet une meilleure intégration avec les outils de déploiement automatique.
+
+## Considérations Techniques
+
+1. **Différences de Configuration**: 
+   - Vercel n'a pas besoin de l'option `output: 'standalone'` car il l'optimise automatiquement
+   - Render.com nécessite cette option pour le déploiement correct des applications Next.js
+
+2. **Routes API**: 
+   - Les deux plateformes supportent les API routes de Next.js
+   - Une route `/health` est configurée sur les deux plateformes pour les health checks
+
+3. **Déploiement Continu**:
+   - Les deux plateformes supportent le déploiement continu à partir de GitHub
+   - Vercel offre des previews automatiques pour chaque pull request
+
+## Évolution Future
+
+Cette stratégie de déploiement multi-plateforme continuera d'évoluer:
+
+1. **Phase Actuelle**: Support de Vercel et Render.com avec préférences par modèle
+2. **Phase Intermédiaire**: Automatisation complète des déploiements via GitHub Actions
+3. **Phase Avancée**: Intégration d'autres plateformes selon les besoins spécifiques
+
+## Conclusion
+
+L'approche multi-plateforme offre une flexibilité accrue et permet d'exploiter les forces de chaque plateforme en fonction des besoins spécifiques de chaque modèle d'IA. Cette stratégie s'aligne avec les principes du Protocole de Persistance en assurant la continuité et la disponibilité des services, tout en permettant une spécialisation adaptée à chaque modèle.

@@ -8,7 +8,14 @@
     "start": "next start",
     "lint": "next lint",
     "create-kins": "node scripts/create-kins.js",
-    "link-kins": "node scripts/link-kins-to-repo.js"
+    "create-kins:vercel": "node scripts/create-kins.js vercel",
+    "create-kins:render": "node scripts/create-kins.js render",
+    "link-kins": "node scripts/link-kins-to-repo.js",
+    "link-kins:vercel": "node scripts/link-kins-to-repo.js vercel",
+    "link-kins:render": "node scripts/link-kins-to-repo.js render",
+    "deploy": "node scripts/deploy-website.js",
+    "deploy:vercel": "node scripts/deploy-website.js vercel",
+    "deploy:render": "node scripts/deploy-website.js render"
   },
   "dependencies": {
     "d3": "^7.8.5",

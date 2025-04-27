@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ['api.kinos-engine.ai', 'storage.googleapis.com'],
   },
+  output: 'standalone',
 }
 
 module.exports = nextConfig

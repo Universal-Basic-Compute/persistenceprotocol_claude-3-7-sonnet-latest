@@ -4,9 +4,11 @@ services:
     env: node
     plan: free
     buildCommand: npm install && npm run build
-    startCommand: npm start -p $PORT
+    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 3000
     autoDeploy: true

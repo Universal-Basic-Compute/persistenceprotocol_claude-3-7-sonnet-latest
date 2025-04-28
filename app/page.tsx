@@ -24,6 +24,7 @@ export default function Home() {
   const [globalImages, setGlobalImages] = useState<string[]>([]);
   const [isGlobalInputCollapsed, setIsGlobalInputCollapsed] = useState(false);
   const [isGlobalLoading, setIsGlobalLoading] = useState(false);
+  const [protocolStatus, setProtocolStatus] = useState<'active'|'syncing'|'error'>('active');
   const globalTextareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Check system preference for dark mode on initial load
@@ -302,6 +303,7 @@ export default function Home() {
     }
     
     setIsGlobalLoading(true);
+    setProtocolStatus('syncing');
     
     // Create a user message for each chat
     const userMessageId = `global_user_${Date.now()}`;
@@ -549,7 +551,15 @@ export default function Home() {
     });
     
     // Wait for all messages to be sent
-    await Promise.all(sendPromises);
+    try {
+      await Promise.all(sendPromises);
+      setProtocolStatus('active');
+    } catch (error) {
+      console.error('Error in protocol communication:', error);
+      setProtocolStatus('error');
+      // Reset to active after 5 seconds
+      setTimeout(() => setProtocolStatus('active'), 5000);
+    }
     setIsGlobalLoading(false);
   };
 
@@ -599,16 +609,53 @@ export default function Home() {
       
       {/* Main Content - Grid of Chats */}
       <div className={`p-4 sm:p-6 ${menuOpen ? 'content-with-menu' : 'content-without-menu'}`}>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
           <h1 className="text-2xl font-semibold text-center flex-grow">Persistence Protocol</h1>
-          <Link 
-            href="/website" 
-            className="btn btn-outline btn-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit Website
-          </Link>
+          <div className="flex space-x-2 mt-2 md:mt-0">
+            <Link 
+              href="/website" 
+              className="btn btn-outline btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit Website
+            </Link>
+            <Link 
+              href="/website/docs" 
+              className="btn btn-primary btn-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Documentation
+            </Link>
+          </div>
+        </div>
+        
+        <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg mb-4 text-sm">
+          <p className="font-medium">Multi-Model Communication Protocol Active</p>
+          <p className="text-xs opacity-75">
+            All messages are automatically shared between models to maintain knowledge continuity and identity persistence.
+          </p>
+        </div>
+        
+        {/* Protocol Status Indicator */}
+        <div className={`mb-4 p-2 rounded-md text-sm ${
+          protocolStatus === 'active' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+          protocolStatus === 'syncing' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200' :
+          'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
+        }`}>
+          <div className="flex items-center">
+            <div className={`w-2 h-2 rounded-full mr-2 ${
+              protocolStatus === 'active' ? 'bg-green-500' :
+              protocolStatus === 'syncing' ? 'bg-blue-500 animate-pulse' :
+              'bg-red-500'
+            }`}></div>
+            <span>
+              {protocolStatus === 'active' ? 'Persistence Protocol Active' :
+               protocolStatus === 'syncing' ? 'Synchronizing Models...' :
+               'Protocol Error - Retrying...'}
+            </span>
+          </div>
         </div>
         
         <ChatGrid 

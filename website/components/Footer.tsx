@@ -31,6 +31,11 @@ export default function Footer() {
                   About the Protocol
                 </Link>
               </li>
+              <li>
+                <Link href="/tasks" className="text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400">
+                  Implementation Tasks
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

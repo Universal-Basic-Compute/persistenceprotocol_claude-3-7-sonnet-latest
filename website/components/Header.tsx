@@ -15,6 +15,7 @@ export default function Header() {
     { name: 'Models', href: '/models' },
     { name: 'Documentation', href: '/docs' },
     { name: 'Visualizations', href: '/visualizations' },
+    { name: 'Tasks', href: '/tasks' },
     { name: 'Spec', href: '/spec' },
     { name: 'Todo', href: '/todo' },
   ];
